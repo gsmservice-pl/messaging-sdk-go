@@ -1,3 +1,4 @@
+[![Go Reference](https://pkg.go.dev/badge/github.com/gsmservice-pl/messaging-sdk-go.svg)](https://pkg.go.dev/github.com/gsmservice-pl/messaging-sdk-go)
 [![GitHub Release](https://img.shields.io/github/v/release/gsmservice-pl/messaging-sdk-go)](https://github.com/gsmservice-pl/messaging-sdk-go)
 [![GitHub License](https://img.shields.io/github/license/gsmservice-pl/messaging-sdk-go)](https://github.com/gsmservice-pl/messaging-sdk-go/blob/main/LICENSE)
 [![Static Badge](https://img.shields.io/badge/built_by-Speakeasy-yellow)](https://www.speakeasy.com/?utm_source=github-com/gsmservice-pl/messaging-sdk-go&utm_campaign=go)
