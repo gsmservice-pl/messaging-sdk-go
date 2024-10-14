@@ -1,5 +1,5 @@
 [![GitHub Release](https://img.shields.io/github/v/release/gsmservice-pl/messaging-sdk-go)](https://github.com/gsmservice-pl/messaging-sdk-go)
-[![GitHub License](https://img.shields.io/github/license/gsmservice-pl/messaging-sdk-php)](https://github.com/gsmservice-pl/messaging-sdk-php/blob/main/LICENSE)
+[![GitHub License](https://img.shields.io/github/license/gsmservice-pl/messaging-sdk-go)](https://github.com/gsmservice-pl/messaging-sdk-go/blob/main/LICENSE)
 [![Static Badge](https://img.shields.io/badge/built_by-Speakeasy-yellow)](https://www.speakeasy.com/?utm_source=github-com/gsmservice-pl/messaging-sdk-go&utm_campaign=go)
 # GSMService.pl Messaging REST API SDK for Go
 
@@ -56,7 +56,7 @@ import (
 
 func main() {
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
 	)
 
 	ctx := context.Background()
@@ -150,7 +150,7 @@ import (
 
 func main() {
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
 	)
 
 	ctx := context.Background()
@@ -200,7 +200,7 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
 	)
 
 	ctx := context.Background()
@@ -245,7 +245,7 @@ import (
 
 func main() {
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
 	)
 
 	ctx := context.Background()
@@ -296,7 +296,7 @@ import (
 func main() {
 	s := messagingsdkgo.New(
 		messagingsdkgo.WithServer("sandbox"),
-		messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
 	)
 
 	ctx := context.Background()
@@ -328,7 +328,7 @@ import (
 func main() {
 	s := messagingsdkgo.New(
 		messagingsdkgo.WithServerURL("https://api.gsmservice.pl/rest"),
-		messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
 	)
 
 	ctx := context.Background()
@@ -382,7 +382,7 @@ This SDK supports the following security scheme globally:
 
 | Name                 | Type                 | Scheme               | Environment Variable |
 | -------------------- | -------------------- | -------------------- | -------------------- |
-| `Bearer`             | http                 | HTTP Bearer          | `CLIENT_BEARER`      |
+| `Bearer`             | http                 | HTTP Bearer          | `GATEWAY_API_BEARER` |
 
 You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
 ```go
@@ -397,7 +397,7 @@ import (
 
 func main() {
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
 	)
 
 	ctx := context.Background()

@@ -3,7 +3,7 @@
 package components
 
 type Security struct {
-	Bearer *string `security:"scheme,type=http,subtype=bearer,name=Authorization,env=client_bearer"`
+	Bearer *string `security:"scheme,type=http,subtype=bearer,name=Authorization,env=gateway_api_bearer"`
 }
 
 func (o *Security) GetBearer() *string {

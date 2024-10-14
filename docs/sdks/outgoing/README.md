@@ -33,7 +33,7 @@ import(
 
 func main() {
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
     )
 
     ctx := context.Background()
@@ -93,7 +93,7 @@ import(
 
 func main() {
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
     )
 
     ctx := context.Background()
@@ -152,7 +152,7 @@ import(
 
 func main() {
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("CLIENT_BEARER")),
+        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
     )
 
     ctx := context.Background()
