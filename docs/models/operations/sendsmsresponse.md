@@ -1,0 +1,10 @@
+# SendSmsResponse
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `HTTPMeta`                                                                                             | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                     | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `Messages`                                                                                             | [][components.Message](../../models/components/message.md)                                             | :heavy_minus_sign:                                                                                     | The request was processed successfully. Please check statuses of particular messages in response body. |
+| `Headers`                                                                                              | map[string][]*string*                                                                                  | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
