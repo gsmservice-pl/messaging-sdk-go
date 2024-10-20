@@ -8,7 +8,7 @@ import (
 
 type ListSendersResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// The request was processed successfully. Please find senders details in response body
+	// The request was processed successfully. Please find senders details in returned objects
 	Senders []components.Sender
 }
 

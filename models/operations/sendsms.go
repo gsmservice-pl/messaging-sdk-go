@@ -12,49 +12,49 @@ import (
 type SendSmsRequestBodyType string
 
 const (
-	SendSmsRequestBodyTypeSms        SendSmsRequestBodyType = "Sms"
-	SendSmsRequestBodyTypeArrayOfSms SendSmsRequestBodyType = "arrayOfSms"
+	SendSmsRequestBodyTypeSmsMessage        SendSmsRequestBodyType = "SmsMessage"
+	SendSmsRequestBodyTypeArrayOfSmsMessage SendSmsRequestBodyType = "arrayOfSmsMessage"
 )
 
-// SendSmsRequestBody - To send a single SMS or messages with the same content to multiple recipients, pass in the Request Body a single `Sms` object with the properties of this message. To send multiple messages with different content at the same time, pass in the Request Body an `array` of `Sms` objects with the properties of each message.
+// SendSmsRequestBody - To send a single SMS or messages with the same content to multiple recipients, please use `operations.CreateGetSmsPriceRequestBodySmsMessage()` method with a single `SmsMessage` object with the properties of this message. To send multiple messages with different content at the same time, please use `operations.CreateSendSmsRequestBodyArrayOfSmsMessage()` method passing to it array of type `[]SmsMessage` with the properties of each message.
 type SendSmsRequestBody struct {
-	Sms        *components.Sms
-	ArrayOfSms []components.Sms
+	SmsMessage        *components.SmsMessage
+	ArrayOfSmsMessage []components.SmsMessage
 
 	Type SendSmsRequestBodyType
 }
 
-func CreateSendSmsRequestBodySms(sms components.Sms) SendSmsRequestBody {
-	typ := SendSmsRequestBodyTypeSms
+func CreateSendSmsRequestBodySmsMessage(smsMessage components.SmsMessage) SendSmsRequestBody {
+	typ := SendSmsRequestBodyTypeSmsMessage
 
 	return SendSmsRequestBody{
-		Sms:  &sms,
-		Type: typ,
+		SmsMessage: &smsMessage,
+		Type:       typ,
 	}
 }
 
-func CreateSendSmsRequestBodyArrayOfSms(arrayOfSms []components.Sms) SendSmsRequestBody {
-	typ := SendSmsRequestBodyTypeArrayOfSms
+func CreateSendSmsRequestBodyArrayOfSmsMessage(arrayOfSmsMessage []components.SmsMessage) SendSmsRequestBody {
+	typ := SendSmsRequestBodyTypeArrayOfSmsMessage
 
 	return SendSmsRequestBody{
-		ArrayOfSms: arrayOfSms,
-		Type:       typ,
+		ArrayOfSmsMessage: arrayOfSmsMessage,
+		Type:              typ,
 	}
 }
 
 func (u *SendSmsRequestBody) UnmarshalJSON(data []byte) error {
 
-	var sms components.Sms = components.Sms{}
-	if err := utils.UnmarshalJSON(data, &sms, "", true, true); err == nil {
-		u.Sms = &sms
-		u.Type = SendSmsRequestBodyTypeSms
+	var smsMessage components.SmsMessage = components.SmsMessage{}
+	if err := utils.UnmarshalJSON(data, &smsMessage, "", true, true); err == nil {
+		u.SmsMessage = &smsMessage
+		u.Type = SendSmsRequestBodyTypeSmsMessage
 		return nil
 	}
 
-	var arrayOfSms []components.Sms = []components.Sms{}
-	if err := utils.UnmarshalJSON(data, &arrayOfSms, "", true, true); err == nil {
-		u.ArrayOfSms = arrayOfSms
-		u.Type = SendSmsRequestBodyTypeArrayOfSms
+	var arrayOfSmsMessage []components.SmsMessage = []components.SmsMessage{}
+	if err := utils.UnmarshalJSON(data, &arrayOfSmsMessage, "", true, true); err == nil {
+		u.ArrayOfSmsMessage = arrayOfSmsMessage
+		u.Type = SendSmsRequestBodyTypeArrayOfSmsMessage
 		return nil
 	}
 
@@ -62,12 +62,12 @@ func (u *SendSmsRequestBody) UnmarshalJSON(data []byte) error {
 }
 
 func (u SendSmsRequestBody) MarshalJSON() ([]byte, error) {
-	if u.Sms != nil {
-		return utils.MarshalJSON(u.Sms, "", true)
+	if u.SmsMessage != nil {
+		return utils.MarshalJSON(u.SmsMessage, "", true)
 	}
 
-	if u.ArrayOfSms != nil {
-		return utils.MarshalJSON(u.ArrayOfSms, "", true)
+	if u.ArrayOfSmsMessage != nil {
+		return utils.MarshalJSON(u.ArrayOfSmsMessage, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type SendSmsRequestBody: all fields are null")
@@ -75,7 +75,7 @@ func (u SendSmsRequestBody) MarshalJSON() ([]byte, error) {
 
 type SendSmsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// The request was processed successfully. Please check statuses of particular messages in response body.
+	// The request was processed successfully. Please check statuses of particular messages in each `Message` object.
 	Messages []components.Message
 	Headers  map[string][]string
 }

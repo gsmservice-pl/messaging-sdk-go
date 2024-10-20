@@ -1,12 +1,6 @@
 # SmsType
 
-SMS type according to the table
-    
-|type|Description|
-|----|-----------|
-|  1 |  SMS PRO  |
-|  3 |  SMS ECO  |
-|  4 |  SMS 2WAY |
+SMS type (components.SmsTypeSmsPro -> SMS PRO, components.SmsTypeSmsEco -> SMS ECO, components.SmsTypeSmsTwoWay -> SMS 2WAY)
 
 
 ## Values

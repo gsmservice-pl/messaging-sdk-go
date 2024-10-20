@@ -1,13 +1,6 @@
 # MessageType
 
-Message type according to the table:
-    
-|type|Description|
-|----|-----------|
-|  1 | SMS PRO   |
-|  3 | SMS ECO   |
-|  4 | SMS 2WAY  |
-| 10 | MMS       |
+Message type (components.MessageTypeSmsPro -> SMS PRO, components.MessageTypeSmsEco -> SMS ECO, components.MessageTypeSmsTwoWay ->SMS 2WAY, components.MessageTypeMms -> MMS)
 
 
 ## Values

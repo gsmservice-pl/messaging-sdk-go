@@ -20,9 +20,9 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSms(
-		[]components.Sms{
-			components.Sms{
+	res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
+		[]components.SmsMessage{
+			components.SmsMessage{
 				Recipients: components.CreateRecipientsArrayOfStr(
 					[]string{
 						"+48999999999",

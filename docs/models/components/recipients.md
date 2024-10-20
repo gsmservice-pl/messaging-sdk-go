@@ -1,6 +1,6 @@
 # Recipients
 
-The recipient number or multiple recipients numbers of single message. To set one recipient, simply pass here a `string` with his phone number. To set multiple recipients, pass here a simple `array` of `string`. Optionally you can also set custom id (user identifier) for each message - pass `PhoneNumberWithCid` object (in case of single recipient) or `Array` of `PhoneNumberWithCid` (in case of multiple recipients).
+The recipient number or multiple recipients numbers of single message. To set one recipient, please use `components.CreateRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateRecipientsArrayOfPhoneNumberWithCid()` method passing []PhoneNumberWithCid (in case of multiple recipients).
 
 
 ## Supported Types

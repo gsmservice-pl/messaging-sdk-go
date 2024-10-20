@@ -41,7 +41,7 @@ func (o *ListIncomingMessagesRequest) GetLimit() *int64 {
 
 type ListIncomingMessagesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// The request was processed successfully. Please check received messages details in response body.
+	// The request was processed successfully. Please check received message details in each `IncomingMessage` object
 	IncomingMessages []components.IncomingMessage
 	Headers          map[string][]string
 }

@@ -2,10 +2,6 @@
 
 package sdkerrors
 
-import (
-	"encoding/json"
-)
-
 // ErrorResponse - An object that complies with RFC 9457 containing information about a request error
 type ErrorResponse struct {
 	// A URI reference that identifies the problem type
@@ -25,6 +21,9 @@ type ErrorResponse struct {
 var _ error = &ErrorResponse{}
 
 func (e *ErrorResponse) Error() string {
-	data, _ := json.Marshal(e)
-	return string(data)
+	if e.Detail == nil {
+		return "unknown error"
+	}
+
+	return *e.Detail
 }

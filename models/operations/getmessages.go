@@ -7,7 +7,7 @@ import (
 )
 
 type GetMessagesRequest struct {
-	// Message IDs assigned by the system (separated by comma). The system will accept a maximum of 50 identifiers in one call.
+	// Array of Message IDs assigned by the system. The system will accept a maximum of 50 identifiers in one call.
 	Ids []int64 `pathParam:"style=simple,explode=true,name=ids"`
 }
 
@@ -20,7 +20,7 @@ func (o *GetMessagesRequest) GetIds() []int64 {
 
 type GetMessagesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// The request was processed successfully. Please check messages details in response body.
+	// The request was processed successfully. Please check messages details in each `Message` object.
 	Messages []components.Message
 	Headers  map[string][]string
 }

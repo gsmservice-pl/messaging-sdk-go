@@ -7,7 +7,7 @@ import (
 )
 
 type CancelMessagesRequest struct {
-	// Message IDs assigned by the system (separated by comma). The system will accept a maximum of 50 identifiers in one call.
+	// Array of Message IDs assigned by the system. The system will accept a maximum of 50 identifiers in one call.
 	Ids []int64 `pathParam:"style=simple,explode=true,name=ids"`
 }
 
@@ -20,7 +20,7 @@ func (o *CancelMessagesRequest) GetIds() []int64 {
 
 type CancelMessagesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// The request was processed successfully. Please check the status of messages cancellation in response body.
+	// The request was processed successfully. Please check the status of messages cancellation in `Status` property of each `CancelledMessage` object.
 	CancelledMessages []components.CancelledMessage
 	Headers           map[string][]string
 }

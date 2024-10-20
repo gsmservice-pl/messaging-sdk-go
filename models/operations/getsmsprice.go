@@ -12,49 +12,49 @@ import (
 type GetSmsPriceRequestBodyType string
 
 const (
-	GetSmsPriceRequestBodyTypeSms        GetSmsPriceRequestBodyType = "Sms"
-	GetSmsPriceRequestBodyTypeArrayOfSms GetSmsPriceRequestBodyType = "arrayOfSms"
+	GetSmsPriceRequestBodyTypeSmsMessage        GetSmsPriceRequestBodyType = "SmsMessage"
+	GetSmsPriceRequestBodyTypeArrayOfSmsMessage GetSmsPriceRequestBodyType = "arrayOfSmsMessage"
 )
 
-// GetSmsPriceRequestBody - To check the price of a single SMS or messages with the same content to multiple recipients, pass in the Request Body a single `Sms` object with the properties of this message. To check the price of multiple messages with different content at the same time, pass in the Request Body an `array` of `Sms` objects with the properties of each message.
+// GetSmsPriceRequestBody - To check the price of a single message or messages with the same content to multiple recipients, pass a single `SmsMessage` object with the properties of this message using `operations.CreateGetSmsPriceRequestBodySmsMessage()` method. To check the price of multiple messages with different content at the same time, pass a `[]SmsMessage` array with the properties of each message using `operations.CreateGetSmsPriceRequestBodyArrayOfSmsMessage()` method.
 type GetSmsPriceRequestBody struct {
-	Sms        *components.Sms
-	ArrayOfSms []components.Sms
+	SmsMessage        *components.SmsMessage
+	ArrayOfSmsMessage []components.SmsMessage
 
 	Type GetSmsPriceRequestBodyType
 }
 
-func CreateGetSmsPriceRequestBodySms(sms components.Sms) GetSmsPriceRequestBody {
-	typ := GetSmsPriceRequestBodyTypeSms
+func CreateGetSmsPriceRequestBodySmsMessage(smsMessage components.SmsMessage) GetSmsPriceRequestBody {
+	typ := GetSmsPriceRequestBodyTypeSmsMessage
 
 	return GetSmsPriceRequestBody{
-		Sms:  &sms,
-		Type: typ,
+		SmsMessage: &smsMessage,
+		Type:       typ,
 	}
 }
 
-func CreateGetSmsPriceRequestBodyArrayOfSms(arrayOfSms []components.Sms) GetSmsPriceRequestBody {
-	typ := GetSmsPriceRequestBodyTypeArrayOfSms
+func CreateGetSmsPriceRequestBodyArrayOfSmsMessage(arrayOfSmsMessage []components.SmsMessage) GetSmsPriceRequestBody {
+	typ := GetSmsPriceRequestBodyTypeArrayOfSmsMessage
 
 	return GetSmsPriceRequestBody{
-		ArrayOfSms: arrayOfSms,
-		Type:       typ,
+		ArrayOfSmsMessage: arrayOfSmsMessage,
+		Type:              typ,
 	}
 }
 
 func (u *GetSmsPriceRequestBody) UnmarshalJSON(data []byte) error {
 
-	var sms components.Sms = components.Sms{}
-	if err := utils.UnmarshalJSON(data, &sms, "", true, true); err == nil {
-		u.Sms = &sms
-		u.Type = GetSmsPriceRequestBodyTypeSms
+	var smsMessage components.SmsMessage = components.SmsMessage{}
+	if err := utils.UnmarshalJSON(data, &smsMessage, "", true, true); err == nil {
+		u.SmsMessage = &smsMessage
+		u.Type = GetSmsPriceRequestBodyTypeSmsMessage
 		return nil
 	}
 
-	var arrayOfSms []components.Sms = []components.Sms{}
-	if err := utils.UnmarshalJSON(data, &arrayOfSms, "", true, true); err == nil {
-		u.ArrayOfSms = arrayOfSms
-		u.Type = GetSmsPriceRequestBodyTypeArrayOfSms
+	var arrayOfSmsMessage []components.SmsMessage = []components.SmsMessage{}
+	if err := utils.UnmarshalJSON(data, &arrayOfSmsMessage, "", true, true); err == nil {
+		u.ArrayOfSmsMessage = arrayOfSmsMessage
+		u.Type = GetSmsPriceRequestBodyTypeArrayOfSmsMessage
 		return nil
 	}
 
@@ -62,12 +62,12 @@ func (u *GetSmsPriceRequestBody) UnmarshalJSON(data []byte) error {
 }
 
 func (u GetSmsPriceRequestBody) MarshalJSON() ([]byte, error) {
-	if u.Sms != nil {
-		return utils.MarshalJSON(u.Sms, "", true)
+	if u.SmsMessage != nil {
+		return utils.MarshalJSON(u.SmsMessage, "", true)
 	}
 
-	if u.ArrayOfSms != nil {
-		return utils.MarshalJSON(u.ArrayOfSms, "", true)
+	if u.ArrayOfSmsMessage != nil {
+		return utils.MarshalJSON(u.ArrayOfSmsMessage, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type GetSmsPriceRequestBody: all fields are null")
@@ -75,7 +75,7 @@ func (u GetSmsPriceRequestBody) MarshalJSON() ([]byte, error) {
 
 type GetSmsPriceResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// The request was processed successfully. Please check the price and the details of particular messages in response body
+	// The request was processed successfully. Please check the price and the details of particular messages in each `Price` object
 	Prices  []components.Price
 	Headers map[string][]string
 }
