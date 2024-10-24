@@ -194,10 +194,10 @@ func New(opts ...SDKOption) *Client {
 	sdk := &Client{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "1.0.1",
-			SDKVersion:        "1.1.0",
+			OpenAPIDocVersion: "1.0.2",
+			SDKVersion:        "1.1.2",
 			GenVersion:        "2.438.15",
-			UserAgent:         "speakeasy-sdk/go 1.1.0 2.438.15 1.0.1 github.com/gsmservice-pl/messaging-sdk-go",
+			UserAgent:         "speakeasy-sdk/go 1.1.2 2.438.15 1.0.2 github.com/gsmservice-pl/messaging-sdk-go",
 			Hooks:             hooks.New(),
 		},
 	}
