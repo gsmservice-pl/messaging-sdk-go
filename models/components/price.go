@@ -9,8 +9,9 @@ type Price struct {
 	// Custom message ID assigned by the User
 	Cid *string `json:"cid,omitempty"`
 	// Message type (components.MessageTypeSmsPro -> SMS PRO, components.MessageTypeSmsEco -> SMS ECO, components.MessageTypeSmsTwoWay ->SMS 2WAY, components.MessageTypeMms -> MMS)
-	Type      *MessageType `json:"type,omitempty"`
-	Recipient *string      `json:"recipient,omitempty"`
+	Type *MessageType `json:"type,omitempty"`
+	// A telephone number in international format (with a plus sign and the country code at the beginning, e.g. +48 for Poland)
+	Recipient *string `json:"recipient,omitempty"`
 	// Message sender name
 	Sender *string `json:"sender,omitempty"`
 	// The count of parts that message consists of

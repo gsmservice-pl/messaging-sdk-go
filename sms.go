@@ -250,7 +250,7 @@ func (s *Sms) GetPrice(ctx context.Context, request operations.GetSmsPriceReques
 }
 
 // Send SMS Messages
-// Send single or multiple SMS messages at the same time. You can pass a single `SmsMessage` object using `operations.CreateGetSmsPriceRequestBodySmsMessage()` method (for single message) or `[]SmsMessage` array using `operations.CreateSendSmsRequestBodyArrayOfSmsMessage()` method (for multiple messages). Each `SmsMessage` object has several properties, describing message parameters such recipient phone number, content of the message, type or scheduled sending date, etc. This method will accept maximum 100 messages in one call.
+// Send single or multiple SMS messages at the same time. You can pass a single `SmsMessage` object using `operations.CreateSendSmsRequestBodySmsMessage()` method (for single message) or `[]SmsMessage` array using `operations.CreateSendSmsRequestBodyArrayOfSmsMessage()` method (for multiple messages). Each `SmsMessage` object has several properties, describing message parameters such recipient phone number, content of the message, type or scheduled sending date, etc. This method will accept maximum 100 messages in one call.
 //
 // As a successful result a `SendSmsResponse` object will be returned with `Messages` property of type `[]Message` containing `Message` objects, one object per each single message. You should check the `StatusCode` property of each `Message` object to make sure which messages were accepted by gateway (queued) and which were rejected. In case of rejection, `StatusDescription` property will include a reason.
 //

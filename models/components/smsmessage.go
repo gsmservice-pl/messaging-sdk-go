@@ -9,95 +9,95 @@ import (
 	"time"
 )
 
-type RecipientsType string
+type SmsMessageRecipientsType string
 
 const (
-	RecipientsTypeStr                       RecipientsType = "str"
-	RecipientsTypeArrayOfStr                RecipientsType = "arrayOfStr"
-	RecipientsTypePhoneNumberWithCid        RecipientsType = "PhoneNumberWithCid"
-	RecipientsTypeArrayOfPhoneNumberWithCid RecipientsType = "arrayOfPhoneNumberWithCid"
+	SmsMessageRecipientsTypeStr                       SmsMessageRecipientsType = "str"
+	SmsMessageRecipientsTypeArrayOfStr                SmsMessageRecipientsType = "arrayOfStr"
+	SmsMessageRecipientsTypePhoneNumberWithCid        SmsMessageRecipientsType = "PhoneNumberWithCid"
+	SmsMessageRecipientsTypeArrayOfPhoneNumberWithCid SmsMessageRecipientsType = "arrayOfPhoneNumberWithCid"
 )
 
-// Recipients - The recipient number or multiple recipients numbers of single message. To set one recipient, please use `components.CreateRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateRecipientsArrayOfPhoneNumberWithCid()` method passing []PhoneNumberWithCid (in case of multiple recipients).
-type Recipients struct {
+// SmsMessageRecipients - The recipient number or multiple recipients numbers of single message. To set one recipient, please use `components.CreateSmsMessageRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateSmsMessageRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateSmsMessageRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid()` method passing []PhoneNumberWithCid (in case of multiple recipients).
+type SmsMessageRecipients struct {
 	Str                       *string
 	ArrayOfStr                []string
 	PhoneNumberWithCid        *PhoneNumberWithCid
 	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid
 
-	Type RecipientsType
+	Type SmsMessageRecipientsType
 }
 
-func CreateRecipientsStr(str string) Recipients {
-	typ := RecipientsTypeStr
+func CreateSmsMessageRecipientsStr(str string) SmsMessageRecipients {
+	typ := SmsMessageRecipientsTypeStr
 
-	return Recipients{
+	return SmsMessageRecipients{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateRecipientsArrayOfStr(arrayOfStr []string) Recipients {
-	typ := RecipientsTypeArrayOfStr
+func CreateSmsMessageRecipientsArrayOfStr(arrayOfStr []string) SmsMessageRecipients {
+	typ := SmsMessageRecipientsTypeArrayOfStr
 
-	return Recipients{
+	return SmsMessageRecipients{
 		ArrayOfStr: arrayOfStr,
 		Type:       typ,
 	}
 }
 
-func CreateRecipientsPhoneNumberWithCid(phoneNumberWithCid PhoneNumberWithCid) Recipients {
-	typ := RecipientsTypePhoneNumberWithCid
+func CreateSmsMessageRecipientsPhoneNumberWithCid(phoneNumberWithCid PhoneNumberWithCid) SmsMessageRecipients {
+	typ := SmsMessageRecipientsTypePhoneNumberWithCid
 
-	return Recipients{
+	return SmsMessageRecipients{
 		PhoneNumberWithCid: &phoneNumberWithCid,
 		Type:               typ,
 	}
 }
 
-func CreateRecipientsArrayOfPhoneNumberWithCid(arrayOfPhoneNumberWithCid []PhoneNumberWithCid) Recipients {
-	typ := RecipientsTypeArrayOfPhoneNumberWithCid
+func CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid(arrayOfPhoneNumberWithCid []PhoneNumberWithCid) SmsMessageRecipients {
+	typ := SmsMessageRecipientsTypeArrayOfPhoneNumberWithCid
 
-	return Recipients{
+	return SmsMessageRecipients{
 		ArrayOfPhoneNumberWithCid: arrayOfPhoneNumberWithCid,
 		Type:                      typ,
 	}
 }
 
-func (u *Recipients) UnmarshalJSON(data []byte) error {
+func (u *SmsMessageRecipients) UnmarshalJSON(data []byte) error {
 
 	var phoneNumberWithCid PhoneNumberWithCid = PhoneNumberWithCid{}
 	if err := utils.UnmarshalJSON(data, &phoneNumberWithCid, "", true, true); err == nil {
 		u.PhoneNumberWithCid = &phoneNumberWithCid
-		u.Type = RecipientsTypePhoneNumberWithCid
+		u.Type = SmsMessageRecipientsTypePhoneNumberWithCid
 		return nil
 	}
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
 		u.Str = &str
-		u.Type = RecipientsTypeStr
+		u.Type = SmsMessageRecipientsTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
 	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
 		u.ArrayOfStr = arrayOfStr
-		u.Type = RecipientsTypeArrayOfStr
+		u.Type = SmsMessageRecipientsTypeArrayOfStr
 		return nil
 	}
 
 	var arrayOfPhoneNumberWithCid []PhoneNumberWithCid = []PhoneNumberWithCid{}
 	if err := utils.UnmarshalJSON(data, &arrayOfPhoneNumberWithCid, "", true, true); err == nil {
 		u.ArrayOfPhoneNumberWithCid = arrayOfPhoneNumberWithCid
-		u.Type = RecipientsTypeArrayOfPhoneNumberWithCid
+		u.Type = SmsMessageRecipientsTypeArrayOfPhoneNumberWithCid
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Recipients", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for SmsMessageRecipients", string(data))
 }
 
-func (u Recipients) MarshalJSON() ([]byte, error) {
+func (u SmsMessageRecipients) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -114,13 +114,13 @@ func (u Recipients) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ArrayOfPhoneNumberWithCid, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type Recipients: all fields are null")
+	return nil, errors.New("could not marshal union type SmsMessageRecipients: all fields are null")
 }
 
 // SmsMessage - An object with a new SMS message properties
 type SmsMessage struct {
-	// The recipient number or multiple recipients numbers of single message. To set one recipient, please use `components.CreateRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateRecipientsArrayOfPhoneNumberWithCid()` method passing []PhoneNumberWithCid (in case of multiple recipients).
-	Recipients Recipients `json:"recipients"`
+	// The recipient number or multiple recipients numbers of single message. To set one recipient, please use `components.CreateSmsMessageRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateSmsMessageRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateSmsMessageRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid()` method passing []PhoneNumberWithCid (in case of multiple recipients).
+	Recipients SmsMessageRecipients `json:"recipients"`
 	// SMS message content
 	Message string `json:"message"`
 	// SMS sender name
@@ -146,9 +146,9 @@ func (s *SmsMessage) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *SmsMessage) GetRecipients() Recipients {
+func (o *SmsMessage) GetRecipients() SmsMessageRecipients {
 	if o == nil {
-		return Recipients{}
+		return SmsMessageRecipients{}
 	}
 	return o.Recipients
 }

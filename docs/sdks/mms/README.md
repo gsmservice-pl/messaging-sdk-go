@@ -1,19 +1,19 @@
-# Sms
-(*Outgoing.Sms*)
+# Mms
+(*Outgoing.Mms*)
 
 ## Overview
 
 ### Available Operations
 
-* [GetPrice](#getprice) - Check the price of SMS Messages
-* [Send](#send) - Send SMS Messages
+* [GetPrice](#getprice) - Check the price of MMS Messages
+* [Send](#send) - Send MMS Messages
 
 ## GetPrice
 
-Check the price of single or multiple SMS messages at the same time before sending them. You can pass a single `SmsMessage` object using `operations.CreateGetSmsPriceRequestBodySmsMessage()` method (for single message) or `[]SmsMessage` array using `operations.CreateGetSmsPriceRequestBodyArrayOfSmsMessage()` method (for multiple messages). Each `SmsMessage` object has several properties, describing message parameters such as recipient phone number, content of the message, type, etc.
-The method will accept maximum **100** messages in one call.
+Check the price of single or multiple MMS messages at the same time before sending them. You can pass a single `MmsMessage` object using `operations.CreateGetMmsPriceRequestBodyMmsMessage()` method (for single message) or `[]MmsMessage` array using `operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage()` method (for multiple messages). Each `MmsMessage` object has several properties, describing message parameters such as recipient phone number, content of the message, attachments, etc. 
+The system will accept maximum **50** messages in one call.
 
-As a successful result a `GetSmsPriceResponse` object will be returned with `Prices` property of type `[]Price` containing a `Price` objects, one object per each single message. You should check the `Error` property of each `Price` object to make sure which messages were priced successfully and which finished with an error. Successfully priced messages will have `null` value of `Error` property.
+As a successful result a `GetMmsPriceResponse` object will be returned with `Prices` property of type `[]Price` containing a `Price` objects, one object per each single message. You should check the `Error` property of each `Price` object to make sure which messages were priced successfully and which finished with an error. Successfully priced messages will have `null` value of `Error` property.
 
 `GetSmsPriceResponse` object will include also `Headers` property with `X-Success-Count` (a count of messages which were processed successfully) and `X-Error-Count` (count of messages which were rejected) elements.
 
@@ -36,20 +36,22 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodyArrayOfSmsMessage(
-        []components.SmsMessage{
-            components.SmsMessage{
-                Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
+    res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage(
+        []components.MmsMessage{
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsPhoneNumberWithCid(
                     components.PhoneNumberWithCid{
                         Nr: "+48999999999",
                         Cid: messagingsdkgo.String("my-id-1113"),
                     },
                 ),
-                Message: "To jest treść wiadomości",
-                Sender: messagingsdkgo.String("Bramka SMS"),
-                Type: components.SmsTypeSmsPro.ToPointer(),
-                Unicode: messagingsdkgo.Bool(true),
-                Flash: messagingsdkgo.Bool(false),
+                Subject: messagingsdkgo.String("To jest temat wiadomości"),
+                Message: messagingsdkgo.String("To jest treść wiadomości"),
+                Attachments: messagingsdkgo.Pointer(components.CreateAttachmentsArrayOfStr(
+                    []string{
+                        "<file_body in base64 format>",
+                    },
+                )),
                 Date: nil,
             },
         },
@@ -68,12 +70,12 @@ func main() {
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.GetSmsPriceRequestBody](../../models/operations/getsmspricerequestbody.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `request`                                                                              | [operations.GetMmsPriceRequestBody](../../models/operations/getmmspricerequestbody.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
 | `opts`                                                                                 | [][operations.Option](../../models/operations/option.md)                               | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
 ### Response
 
-**[*operations.GetSmsPriceResponse](../../models/operations/getsmspriceresponse.md), error**
+**[*operations.GetMmsPriceResponse](../../models/operations/getmmspriceresponse.md), error**
 
 ### Errors
 
@@ -83,11 +85,11 @@ func main() {
 
 ## Send
 
-Send single or multiple SMS messages at the same time. You can pass a single `SmsMessage` object using `operations.CreateSendSmsRequestBodySmsMessage()` method (for single message) or `[]SmsMessage` array using `operations.CreateSendSmsRequestBodyArrayOfSmsMessage()` method (for multiple messages). Each `SmsMessage` object has several properties, describing message parameters such recipient phone number, content of the message, type or scheduled sending date, etc. This method will accept maximum 100 messages in one call.
+Send single or multiple MMS messages at the same time. You can pass a single `MmsMessage` object using `operations.CreateSendMmsRequestBodyMmsMessage()` method (for single message) or `[]MmsMessage` array using `operations.CreateSendMmsRequestBodyArrayOfMmsMessage()` method (for multiple messages). Each `MmsMessage` object has several properties, describing message parameters such recipient phone number, content of the message, attachments or scheduled sending date, etc. This method will accept maximum 50 messages in one call.
 
-As a successful result a `SendSmsResponse` object will be returned with `Messages` property of type `[]Message` containing `Message` objects, one object per each single message. You should check the `StatusCode` property of each `Message` object to make sure which messages were accepted by gateway (queued) and which were rejected. In case of rejection, `StatusDescription` property will include a reason.
+As a successful result a `SendMmsResponse` object will be returned with `Messages` property of type `[]Message` containing `Message` objects, one object per each single message. You should check the `StatusCode` property of each `Message` object to make sure which messages were accepted by gateway (queued) and which were rejected. In case of rejection, `StatusDescription` property will include a reason.
 
-`SendSmsResponse` will also include `Headers` property with `X-Success-Count` (a count of messages which were processed successfully), `X-Error-Count` (count of messages which were rejected) and `X-Sandbox` (if a request was made in Sandbox or Production system) elements.
+`SendMmsResponse` will also include `Headers` property with `X-Success-Count` (a count of messages which were processed successfully), `X-Error-Count` (count of messages which were rejected) and `X-Sandbox` (if a request was made in Sandbox or Production system) elements.
 
 ### Example Usage
 
@@ -108,19 +110,21 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
-        []components.SmsMessage{
-            components.SmsMessage{
-                Recipients: components.CreateSmsMessageRecipientsArrayOfStr(
+    res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyArrayOfMmsMessage(
+        []components.MmsMessage{
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsArrayOfStr(
                     []string{
                         "+48999999999",
                     },
                 ),
-                Message: "To jest treść wiadomości",
-                Sender: messagingsdkgo.String("Bramka SMS"),
-                Type: components.SmsTypeSmsPro.ToPointer(),
-                Unicode: messagingsdkgo.Bool(true),
-                Flash: messagingsdkgo.Bool(false),
+                Subject: messagingsdkgo.String("To jest temat wiadomości"),
+                Message: messagingsdkgo.String("To jest treść wiadomości"),
+                Attachments: messagingsdkgo.Pointer(components.CreateAttachmentsArrayOfStr(
+                    []string{
+                        "<file_body in base64 format>",
+                    },
+                )),
                 Date: nil,
             },
         },
@@ -139,12 +143,12 @@ func main() {
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.SendSmsRequestBody](../../models/operations/sendsmsrequestbody.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| `request`                                                                      | [operations.SendMmsRequestBody](../../models/operations/sendmmsrequestbody.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 | `opts`                                                                         | [][operations.Option](../../models/operations/option.md)                       | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
 ### Response
 
-**[*operations.SendSmsResponse](../../models/operations/sendsmsresponse.md), error**
+**[*operations.SendMmsResponse](../../models/operations/sendmmsresponse.md), error**
 
 ### Errors
 
