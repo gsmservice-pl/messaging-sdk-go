@@ -19,15 +19,16 @@ As a successful result a `PingResponse` object will be returned.
 package main
 
 import(
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New()
 
-    ctx := context.Background()
     res, err := s.Common.Ping(ctx)
     if err != nil {
         log.Fatal(err)
@@ -53,4 +54,5 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 4XX, 503, 5XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 4XX                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 503, 5XX                 | application/problem+json |

@@ -13,7 +13,7 @@ import (
 
 	"github.com/ericlagergren/decimal"
 
-	"github.com/gsmservice-pl/messaging-sdk-go/types"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/types"
 )
 
 func GenerateURL(_ context.Context, serverURL, path string, pathParams interface{}, globals interface{}) (string, error) {

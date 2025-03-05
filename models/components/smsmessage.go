@@ -5,7 +5,7 @@ package components
 import (
 	"errors"
 	"fmt"
-	"github.com/gsmservice-pl/messaging-sdk-go/internal/utils"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/internal/utils"
 	"time"
 )
 
@@ -20,10 +20,10 @@ const (
 
 // SmsMessageRecipients - The recipient number or multiple recipients numbers of single message. To set one recipient, please use `components.CreateSmsMessageRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateSmsMessageRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateSmsMessageRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid()` method passing []PhoneNumberWithCid (in case of multiple recipients).
 type SmsMessageRecipients struct {
-	Str                       *string
-	ArrayOfStr                []string
-	PhoneNumberWithCid        *PhoneNumberWithCid
-	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid
+	Str                       *string              `queryParam:"inline"`
+	ArrayOfStr                []string             `queryParam:"inline"`
+	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline"`
+	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline"`
 
 	Type SmsMessageRecipientsType
 }

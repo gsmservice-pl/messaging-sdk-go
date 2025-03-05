@@ -2,30 +2,35 @@
 [![GitHub Release](https://img.shields.io/github/v/release/gsmservice-pl/messaging-sdk-go)](https://github.com/gsmservice-pl/messaging-sdk-go)
 [![GitHub License](https://img.shields.io/github/license/gsmservice-pl/messaging-sdk-go)](https://github.com/gsmservice-pl/messaging-sdk-go/blob/main/LICENSE)
 [![Static Badge](https://img.shields.io/badge/built_by-Speakeasy-yellow)](https://www.speakeasy.com/?utm_source=github-com/gsmservice-pl/messaging-sdk-go&utm_campaign=go)
-# GSMService.pl Messaging REST API SDK for Go
+# SzybkiSMS.pl Messaging REST API SDK for Go (powered by GSMService.pl)
 
-This package includes Messaging SDK for Go to send SMS & MMS messages directly from your app via https://bramka.gsmservice.pl messaging platform.
+This package includes Messaging SDK for Go to send SMS & MMS messages directly from your app via https://szybkisms.pl messaging platform.
 
 ## Additional documentation:
 
 A documentation of all methods and types is available below in section [Available Resources and Operations
 ](#available-resources-and-operations).
 
-Also you can refer to the [REST API documentation](https://api.gsmservice.pl/rest/) for additional details about the basics of this SDK.
+Also you can refer to the [REST API documentation](https://api.szybkisms.pl/rest/) for additional details about the basics of this SDK.
 <!-- No Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [SzybkiSMS.pl Messaging REST API SDK for Go (powered by GSMService.pl)](#szybkismspl-messaging-rest-api-sdk-for-go-powered-by-gsmservicepl)
+  * [Additional documentation:](#additional-documentation)
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
 
-* [SDK Installation](#sdk-installation)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
-* [Special Types](#special-types)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -33,7 +38,7 @@ Also you can refer to the [REST API documentation](https://api.gsmservice.pl/res
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/gsmservice-pl/messaging-sdk-go
+go get github.com/gsmservice-pl/messaging-sdk-go/v3
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -49,32 +54,26 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
 	res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
 		[]components.SmsMessage{
 			components.SmsMessage{
-				Recipients: components.CreateSmsMessageRecipientsArrayOfStr(
-					[]string{
-						"+48999999999",
-					},
+				Recipients: components.CreateSmsMessageRecipientsStr(
+					"+48999999999",
 				),
 				Message: "To jest treść wiadomości",
-				Sender:  messagingsdkgo.String("Bramka SMS"),
-				Type:    components.SmsTypeSmsPro.ToPointer(),
-				Unicode: messagingsdkgo.Bool(true),
-				Flash:   messagingsdkgo.Bool(false),
-				Date:    nil,
 			},
 		},
 	))
@@ -97,35 +96,32 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
-	res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyArrayOfMmsMessage(
-		[]components.MmsMessage{
-			components.MmsMessage{
-				Recipients: components.CreateRecipientsArrayOfStr(
-					[]string{
-						"+48999999999",
-					},
-				),
-				Subject: messagingsdkgo.String("To jest temat wiadomości"),
-				Message: messagingsdkgo.String("To jest treść wiadomości"),
-				Attachments: messagingsdkgo.Pointer(components.CreateAttachmentsArrayOfStr(
-					[]string{
-						"<file_body in base64 format>",
-					},
-				)),
-				Date: nil,
-			},
+	res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
+		components.MmsMessage{
+			Recipients: components.CreateRecipientsPhoneNumberWithCid(
+				components.PhoneNumberWithCid{
+					Nr:  "+48999999999",
+					Cid: messagingsdkgo.String("my-id-1113"),
+				},
+			),
+			Subject: messagingsdkgo.String("To jest temat wiadomości"),
+			Message: messagingsdkgo.String("To jest treść wiadomości"),
+			Attachments: messagingsdkgo.Pointer(components.CreateAttachmentsStr(
+				"<file_body in base64 format>",
+			)),
 		},
 	))
 	if err != nil {
@@ -197,19 +193,19 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
-	"github.com/gsmservice-pl/messaging-sdk-go/retry"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/retry"
 	"log"
 	"models/operations"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
 	res, err := s.Accounts.Get(ctx, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
@@ -237,13 +233,14 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
-	"github.com/gsmservice-pl/messaging-sdk-go/retry"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/retry"
 	"log"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
 		messagingsdkgo.WithRetryConfig(
 			retry.Config{
@@ -256,10 +253,9 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
 	res, err := s.Accounts.Get(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -281,9 +277,10 @@ By Default, an API error will return `sdkerrors.SDKError`. When custom error res
 
 For example, the `Get` function may return the following errors:
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 401, 403, 4XX, 5XX       | application/problem+json |
+| Error Type              | Status Code   | Content Type             |
+| ----------------------- | ------------- | ------------------------ |
+| sdkerrors.ErrorResponse | 401, 403, 4XX | application/problem+json |
+| sdkerrors.ErrorResponse | 5XX           | application/problem+json |
 
 ### Example
 
@@ -293,20 +290,26 @@ package main
 import (
 	"context"
 	"errors"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/sdkerrors"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/sdkerrors"
 	"log"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
 	res, err := s.Accounts.Get(ctx)
 	if err != nil {
+
+		var e *sdkerrors.ErrorResponse
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 
 		var e *sdkerrors.ErrorResponse
 		if errors.As(err, &e) {
@@ -330,12 +333,12 @@ func main() {
 
 ### Select Server by Name
 
-You can override the default server globally using the `WithServer` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
+You can override the default server globally using the `WithServer(server string)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name | Server | Variables |
-| ----- | ------ | --------- |
-| `prod` | `https://api.gsmservice.pl/rest` | None |
-| `sandbox` | `https://api.gsmservice.pl/rest-sandbox` | None |
+| Name      | Server                                  | Description           |
+| --------- | --------------------------------------- | --------------------- |
+| `prod`    | `https://api.szybkisms.pl/rest`         | Production system     |
+| `sandbox` | `https://api.szybkisms.pl/rest-sandbox` | Test system (SANDBOX) |
 
 #### Example
 
@@ -344,18 +347,18 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
 		messagingsdkgo.WithServer("sandbox"),
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
 	res, err := s.Accounts.Get(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -367,27 +370,26 @@ func main() {
 
 ```
 
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
+The default server can also be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
 ```go
 package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithServerURL("https://api.gsmservice.pl/rest"),
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithServerURL("https://api.szybkisms.pl/rest"),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
 	res, err := s.Accounts.Get(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -436,9 +438,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 This SDK supports the following security scheme globally:
 
-| Name                 | Type                 | Scheme               | Environment Variable |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `Bearer`             | http                 | HTTP Bearer          | `GATEWAY_API_BEARER` |
+| Name     | Type | Scheme      | Environment Variable |
+| -------- | ---- | ----------- | -------------------- |
+| `Bearer` | http | HTTP Bearer | `GATEWAY_API_BEARER` |
 
 You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
 ```go
@@ -446,17 +448,17 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
 	res, err := s.Accounts.Get(ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -468,12 +470,6 @@ func main() {
 
 ```
 <!-- End Authentication [security] -->
-
-<!-- Start Special Types [types] -->
-## Special Types
-
-
-<!-- End Special Types [types] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

@@ -22,19 +22,19 @@ As a successful result a `ListIncomingMessagesResponse` object will be returned 
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
-    res, err := s.Incoming.List(ctx, messagingsdkgo.Int64(1), messagingsdkgo.Int64(10))
+    res, err := s.Incoming.List(ctx, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -59,9 +59,10 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.ErrorResponse      | 400, 401, 403, 404, 4XX, 5XX | application/problem+json     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| sdkerrors.ErrorResponse  | 400, 401, 403, 404, 4XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## GetByIds
 
@@ -77,18 +78,18 @@ As a successful result a `GetIncomingMessagesResponse` object will be returned w
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
     res, err := s.Incoming.GetByIds(ctx, []int64{
         43456,
     })
@@ -117,4 +118,5 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 404, 4XX, 5XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 401, 404, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |

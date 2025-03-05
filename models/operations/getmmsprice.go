@@ -5,8 +5,8 @@ package operations
 import (
 	"errors"
 	"fmt"
-	"github.com/gsmservice-pl/messaging-sdk-go/internal/utils"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/internal/utils"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
 )
 
 type GetMmsPriceRequestBodyType string
@@ -18,8 +18,8 @@ const (
 
 // GetMmsPriceRequestBody - To check the price of a single message or messages with the same content to multiple recipients, pass a single `MmsMessage` object with the properties of this message using `operations.CreateGetMmsPriceRequestBodyMmsMessage()` method. To check the price of multiple messages with different content at the same time, pass a `[]MmsMessage` array with the properties of each message using `operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage()` method.
 type GetMmsPriceRequestBody struct {
-	MmsMessage        *components.MmsMessage
-	ArrayOfMmsMessage []components.MmsMessage
+	MmsMessage        *components.MmsMessage  `queryParam:"inline"`
+	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline"`
 
 	Type GetMmsPriceRequestBodyType
 }

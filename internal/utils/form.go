@@ -12,14 +12,18 @@ import (
 
 	"github.com/ericlagergren/decimal"
 
-	"github.com/gsmservice-pl/messaging-sdk-go/types"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/types"
 )
 
-func populateForm(paramName string, explode bool, objType reflect.Type, objValue reflect.Value, delimiter string, getFieldName func(reflect.StructField) string) url.Values {
+func populateForm(paramName string, explode bool, objType reflect.Type, objValue reflect.Value, delimiter string, defaultValue *string, getFieldName func(reflect.StructField) string) url.Values {
 
 	formValues := url.Values{}
 
 	if isNil(objType, objValue) {
+		if defaultValue != nil {
+			formValues.Add(paramName, *defaultValue)
+		}
+
 		return formValues
 	}
 

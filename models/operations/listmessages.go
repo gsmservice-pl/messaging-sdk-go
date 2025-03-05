@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"github.com/gsmservice-pl/messaging-sdk-go/internal/utils"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/internal/utils"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
 )
 
 type ListMessagesRequest struct {

@@ -8,32 +8,26 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
 	res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
 		[]components.SmsMessage{
 			components.SmsMessage{
-				Recipients: components.CreateSmsMessageRecipientsArrayOfStr(
-					[]string{
-						"+48999999999",
-					},
+				Recipients: components.CreateSmsMessageRecipientsStr(
+					"+48999999999",
 				),
 				Message: "To jest treść wiadomości",
-				Sender:  messagingsdkgo.String("Bramka SMS"),
-				Type:    components.SmsTypeSmsPro.ToPointer(),
-				Unicode: messagingsdkgo.Bool(true),
-				Flash:   messagingsdkgo.Bool(false),
-				Date:    nil,
 			},
 		},
 	))
@@ -56,35 +50,32 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
-	"os"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	ctx := context.Background()
-	res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyArrayOfMmsMessage(
-		[]components.MmsMessage{
-			components.MmsMessage{
-				Recipients: components.CreateRecipientsArrayOfStr(
-					[]string{
-						"+48999999999",
-					},
-				),
-				Subject: messagingsdkgo.String("To jest temat wiadomości"),
-				Message: messagingsdkgo.String("To jest treść wiadomości"),
-				Attachments: messagingsdkgo.Pointer(components.CreateAttachmentsArrayOfStr(
-					[]string{
-						"<file_body in base64 format>",
-					},
-				)),
-				Date: nil,
-			},
+	res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
+		components.MmsMessage{
+			Recipients: components.CreateRecipientsPhoneNumberWithCid(
+				components.PhoneNumberWithCid{
+					Nr:  "+48999999999",
+					Cid: messagingsdkgo.String("my-id-1113"),
+				},
+			),
+			Subject: messagingsdkgo.String("To jest temat wiadomości"),
+			Message: messagingsdkgo.String("To jest treść wiadomości"),
+			Attachments: messagingsdkgo.Pointer(components.CreateAttachmentsStr(
+				"<file_body in base64 format>",
+			)),
 		},
 	))
 	if err != nil {

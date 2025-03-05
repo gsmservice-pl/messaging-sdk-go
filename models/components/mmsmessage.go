@@ -5,7 +5,7 @@ package components
 import (
 	"errors"
 	"fmt"
-	"github.com/gsmservice-pl/messaging-sdk-go/internal/utils"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/internal/utils"
 	"time"
 )
 
@@ -20,10 +20,10 @@ const (
 
 // Recipients - The recipient number or multiple recipients numbers of single message. To set one recipient, simply use `components.CreateRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateRecipientsArrayOfPhoneNumberWithCid()` method passing `[]PhoneNumberWithCid` (in case of multiple recipients).
 type Recipients struct {
-	Str                       *string
-	ArrayOfStr                []string
-	PhoneNumberWithCid        *PhoneNumberWithCid
-	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid
+	Str                       *string              `queryParam:"inline"`
+	ArrayOfStr                []string             `queryParam:"inline"`
+	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline"`
+	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline"`
 
 	Type RecipientsType
 }
@@ -126,8 +126,8 @@ const (
 
 // Attachments for the message. You can pass here images, audio and video files bodies. To set one attachment please use `components.CreateAttachmentsStr()` method simply passing to it a `string` with attachment body encoded with `base64`. To set multiple attachments - please use `components.CreateAttachmentsArrayOfStr()` method passing to it `[]string` with attachment bodies encoded by `base64`. Max 3 attachments per message.
 type Attachments struct {
-	Str        *string
-	ArrayOfStr []string
+	Str        *string  `queryParam:"inline"`
+	ArrayOfStr []string `queryParam:"inline"`
 
 	Type AttachmentsType
 }
@@ -188,7 +188,7 @@ type MmsMessage struct {
 	// MMS message subject
 	Subject *string `json:"subject,omitempty"`
 	// MMS message content
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 	// Attachments for the message. You can pass here images, audio and video files bodies. To set one attachment please use `components.CreateAttachmentsStr()` method simply passing to it a `string` with attachment body encoded with `base64`. To set multiple attachments - please use `components.CreateAttachmentsArrayOfStr()` method passing to it `[]string` with attachment bodies encoded by `base64`. Max 3 attachments per message.
 	Attachments *Attachments `json:"attachments,omitempty"`
 	// Scheduled future date and time of sending the message (in ISO 8601 format). If missing or null - message will be sent immediately

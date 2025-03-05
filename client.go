@@ -5,10 +5,10 @@ package messagingsdkgo
 import (
 	"context"
 	"fmt"
-	"github.com/gsmservice-pl/messaging-sdk-go/internal/hooks"
-	"github.com/gsmservice-pl/messaging-sdk-go/internal/utils"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/retry"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/internal/hooks"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/internal/utils"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/retry"
 	"net/http"
 	"time"
 )
@@ -22,8 +22,8 @@ const (
 
 // ServerList contains the list of servers available to the SDK
 var ServerList = map[string]string{
-	ServerProd:    "https://api.gsmservice.pl/rest",
-	ServerSandbox: "https://api.gsmservice.pl/rest-sandbox",
+	ServerProd:    "https://api.szybkisms.pl/rest",
+	ServerSandbox: "https://api.szybkisms.pl/rest-sandbox",
 }
 
 // HTTPClient provides an interface for suplying the SDK with a custom HTTP client
@@ -79,7 +79,7 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 	return ServerList[c.Server], nil
 }
 
-// Client - Messaging Gateway GSMService.pl: This package includes Messaging SDK for GO to send SMS and MMS messages directly from your app via [https://bramka.gsmservice.pl](https://bramka.gsmservice.pl) messaging platform.
+// Client - Messaging Gateway SzybkiSMS.pl (former GSMService.pl): This package includes Messaging SDK for GO to send SMS and MMS messages directly from your app via [https://szybkisms.pl](https://szybkisms.pl) messaging platform.
 //
 // To initialize SDK environment please use this syntax:
 //
@@ -109,7 +109,7 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // )
 // ```
 //
-// https://bramka.gsmservice.pl - Bramka GSMService.pl
+// https://szybkisms.pl - SzybkiSMS.pl
 type Client struct {
 	Accounts *Accounts
 	Outgoing *Outgoing
@@ -194,10 +194,10 @@ func New(opts ...SDKOption) *Client {
 	sdk := &Client{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "1.1.2",
-			SDKVersion:        "1.2.5",
-			GenVersion:        "2.438.15",
-			UserAgent:         "speakeasy-sdk/go 1.2.5 2.438.15 1.1.2 github.com/gsmservice-pl/messaging-sdk-go",
+			OpenAPIDocVersion: "1.2.1",
+			SDKVersion:        "3.0.1",
+			GenVersion:        "2.539.1",
+			UserAgent:         "speakeasy-sdk/go 3.0.1 2.539.1 1.2.1 github.com/gsmservice-pl/messaging-sdk-go",
 			Hooks:             hooks.New(),
 		},
 	}

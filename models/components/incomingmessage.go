@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/gsmservice-pl/messaging-sdk-go/internal/utils"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/internal/utils"
 	"time"
 )
 

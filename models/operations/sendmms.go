@@ -5,8 +5,8 @@ package operations
 import (
 	"errors"
 	"fmt"
-	"github.com/gsmservice-pl/messaging-sdk-go/internal/utils"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/internal/utils"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
 )
 
 type SendMmsRequestBodyType string
@@ -18,8 +18,8 @@ const (
 
 // SendMmsRequestBody - To send a single MMS or messages with the same content to multiple recipients, please use `operations.CreateSendMmsRequestBodyMmsMessage()` method with a single `MmsMessage` object with the properties of this message. To send multiple messages with different content at the same time, please use `operations.CreateSendMmsRequestBodyArrayOfMmsMessage()` method passing to it array of type `[]MmsMessage` with the properties of each message.
 type SendMmsRequestBody struct {
-	MmsMessage        *components.MmsMessage
-	ArrayOfMmsMessage []components.MmsMessage
+	MmsMessage        *components.MmsMessage  `queryParam:"inline"`
+	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline"`
 
 	Type SendMmsRequestBodyType
 }

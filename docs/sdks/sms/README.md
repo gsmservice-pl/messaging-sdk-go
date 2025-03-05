@@ -23,19 +23,20 @@ As a successful result a `GetSmsPriceResponse` object will be returned with `Pri
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
     res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodyArrayOfSmsMessage(
         []components.SmsMessage{
             components.SmsMessage{
@@ -46,11 +47,6 @@ func main() {
                     },
                 ),
                 Message: "To jest treść wiadomości",
-                Sender: messagingsdkgo.String("Bramka SMS"),
-                Type: components.SmsTypeSmsPro.ToPointer(),
-                Unicode: messagingsdkgo.Bool(true),
-                Flash: messagingsdkgo.Bool(false),
-                Date: nil,
             },
         },
     ))
@@ -79,7 +75,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 4XX, 5XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 401, 4XX            | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## Send
 
@@ -95,33 +92,27 @@ As a successful result a `SendSmsResponse` object will be returned with `Message
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
     res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
         []components.SmsMessage{
             components.SmsMessage{
-                Recipients: components.CreateSmsMessageRecipientsArrayOfStr(
-                    []string{
-                        "+48999999999",
-                    },
+                Recipients: components.CreateSmsMessageRecipientsStr(
+                    "+48999999999",
                 ),
                 Message: "To jest treść wiadomości",
-                Sender: messagingsdkgo.String("Bramka SMS"),
-                Type: components.SmsTypeSmsPro.ToPointer(),
-                Unicode: messagingsdkgo.Bool(true),
-                Flash: messagingsdkgo.Bool(false),
-                Date: nil,
             },
         },
     ))
@@ -150,4 +141,5 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX, 5XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |

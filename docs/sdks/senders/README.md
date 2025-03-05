@@ -22,18 +22,18 @@ As a successful result a `ListSendersResponse` object will be returned witch `Se
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
     res, err := s.Senders.List(ctx)
     if err != nil {
         log.Fatal(err)
@@ -59,7 +59,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX, 5XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## Add
 
@@ -73,19 +74,19 @@ As a successful result a `AddSenderResponse` object will be returned with a `Sen
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/models/components"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
     res, err := s.Senders.Add(ctx, components.SenderInput{
         Sender: "Bramka SMS",
         Description: "This is our company name. It contains our registered trademark.",
@@ -115,7 +116,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX, 5XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## Delete
 
@@ -129,18 +131,18 @@ As a successful response there would be `DeleteSenderResponse` object returned w
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
     res, err := s.Senders.Delete(ctx, "Podpis")
     if err != nil {
         log.Fatal(err)
@@ -165,9 +167,10 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.ErrorResponse      | 400, 401, 403, 404, 4XX, 5XX | application/problem+json     |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| sdkerrors.ErrorResponse  | 400, 401, 403, 404, 4XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## SetDefault
 
@@ -181,18 +184,18 @@ As a successful response a `SetDefaultSenderResponse` object will be returned no
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
     res, err := s.Senders.SetDefault(ctx, "Podpis")
     if err != nil {
         log.Fatal(err)
@@ -219,5 +222,6 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX, 5XX  | application/problem+json |
 | sdkerrors.ErrorResponse  | 404                      | application/json         |
+| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |

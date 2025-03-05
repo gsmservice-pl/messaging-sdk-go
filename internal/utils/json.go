@@ -13,7 +13,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/gsmservice-pl/messaging-sdk-go/types"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/types"
 
 	"github.com/ericlagergren/decimal"
 )

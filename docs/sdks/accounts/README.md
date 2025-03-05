@@ -10,7 +10,7 @@
 
 ## Get
 
-Get current account balance and other details of your account. You can check also account limit and if account is main one. Main accounts have unlimited privileges and using [User Panel](https://panel.gsmservice.pl) you can create as many subaccounts as you need.
+Get current account balance and other details of your account. You can check also account limit and if account is main one. Main accounts have unlimited privileges and using [User Panel](https://panel.szybkisms.pl) you can create as many subaccounts as you need.
  
 As a successful result a details of current account you are logged in using an API Access Token will be returned.
 
@@ -20,18 +20,18 @@ As a successful result a details of current account you are logged in using an A
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
     res, err := s.Accounts.Get(ctx)
     if err != nil {
         log.Fatal(err)
@@ -57,11 +57,12 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 401, 403, 4XX, 5XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 403, 4XX            | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## GetSubaccount
 
-Check account balance and other details such subcredit balance of a subaccount. Subaccounts are additional users who can access your account services and the details. You can restrict access level and setup privileges to subaccounts using [User Panel](https://panel.gsmservice.pl).
+Check account balance and other details such subcredit balance of a subaccount. Subaccounts are additional users who can access your account services and the details. You can restrict access level and setup privileges to subaccounts using [User Panel](https://panel.szybkisms.pl).
 
 This method accepts a `string` type parameter with user login. You should pass there the full subaccount login to access its data.
 
@@ -73,18 +74,18 @@ As a successful result the details of subaccount with provided login will be ret
 package main
 
 import(
-	"os"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go"
 	"context"
+	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity(os.Getenv("GATEWAY_API_BEARER")),
+        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    ctx := context.Background()
     res, err := s.Accounts.GetSubaccount(ctx, "some-login")
     if err != nil {
         log.Fatal(err)
@@ -111,4 +112,5 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 401, 403, 404, 4XX, 5XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 403, 404, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
