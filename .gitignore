@@ -5,3 +5,4 @@
 .env.local
 .speakeasy/reports
 # .gitignore
+/.devcontainer/
