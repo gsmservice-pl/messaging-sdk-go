@@ -42,99 +42,99 @@ func (m Message) MarshalJSON() ([]byte, error) {
 }
 
 func (m *Message) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Message) GetID() *int64 {
-	if o == nil {
+func (m *Message) GetID() *int64 {
+	if m == nil {
 		return nil
 	}
-	return o.ID
+	return m.ID
 }
 
-func (o *Message) GetCid() *string {
-	if o == nil {
+func (m *Message) GetCid() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Cid
+	return m.Cid
 }
 
-func (o *Message) GetType() *MessageType {
-	if o == nil {
+func (m *Message) GetType() *MessageType {
+	if m == nil {
 		return nil
 	}
-	return o.Type
+	return m.Type
 }
 
-func (o *Message) GetRecipient() *string {
-	if o == nil {
+func (m *Message) GetRecipient() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Recipient
+	return m.Recipient
 }
 
-func (o *Message) GetSender() *string {
-	if o == nil {
+func (m *Message) GetSender() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Sender
+	return m.Sender
 }
 
-func (o *Message) GetParts() *int64 {
-	if o == nil {
+func (m *Message) GetParts() *int64 {
+	if m == nil {
 		return nil
 	}
-	return o.Parts
+	return m.Parts
 }
 
-func (o *Message) GetSentDate() *time.Time {
-	if o == nil {
+func (m *Message) GetSentDate() *time.Time {
+	if m == nil {
 		return nil
 	}
-	return o.SentDate
+	return m.SentDate
 }
 
-func (o *Message) GetStatusDate() *time.Time {
-	if o == nil {
+func (m *Message) GetStatusDate() *time.Time {
+	if m == nil {
 		return nil
 	}
-	return o.StatusDate
+	return m.StatusDate
 }
 
-func (o *Message) GetStatusCode() *string {
-	if o == nil {
+func (m *Message) GetStatusCode() *string {
+	if m == nil {
 		return nil
 	}
-	return o.StatusCode
+	return m.StatusCode
 }
 
-func (o *Message) GetStatusDescription() *string {
-	if o == nil {
+func (m *Message) GetStatusDescription() *string {
+	if m == nil {
 		return nil
 	}
-	return o.StatusDescription
+	return m.StatusDescription
 }
 
-func (o *Message) GetUnicode() *bool {
-	if o == nil {
+func (m *Message) GetUnicode() *bool {
+	if m == nil {
 		return nil
 	}
-	return o.Unicode
+	return m.Unicode
 }
 
-func (o *Message) GetFlash() *bool {
-	if o == nil {
+func (m *Message) GetFlash() *bool {
+	if m == nil {
 		return nil
 	}
-	return o.Flash
+	return m.Flash
 }
 
-func (o *Message) GetPrice() *float32 {
-	if o == nil {
+func (m *Message) GetPrice() *float32 {
+	if m == nil {
 		return nil
 	}
-	return o.Price
+	return m.Price
 }

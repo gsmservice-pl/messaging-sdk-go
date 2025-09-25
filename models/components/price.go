@@ -24,65 +24,65 @@ type Price struct {
 	Price *float32 `json:"price,omitempty"`
 }
 
-func (o *Price) GetError() *string {
-	if o == nil {
+func (p *Price) GetError() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Error
+	return p.Error
 }
 
-func (o *Price) GetCid() *string {
-	if o == nil {
+func (p *Price) GetCid() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Cid
+	return p.Cid
 }
 
-func (o *Price) GetType() *MessageType {
-	if o == nil {
+func (p *Price) GetType() *MessageType {
+	if p == nil {
 		return nil
 	}
-	return o.Type
+	return p.Type
 }
 
-func (o *Price) GetRecipient() *string {
-	if o == nil {
+func (p *Price) GetRecipient() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Recipient
+	return p.Recipient
 }
 
-func (o *Price) GetSender() *string {
-	if o == nil {
+func (p *Price) GetSender() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Sender
+	return p.Sender
 }
 
-func (o *Price) GetParts() *int64 {
-	if o == nil {
+func (p *Price) GetParts() *int64 {
+	if p == nil {
 		return nil
 	}
-	return o.Parts
+	return p.Parts
 }
 
-func (o *Price) GetUnicode() *bool {
-	if o == nil {
+func (p *Price) GetUnicode() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Unicode
+	return p.Unicode
 }
 
-func (o *Price) GetFlash() *bool {
-	if o == nil {
+func (p *Price) GetFlash() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Flash
+	return p.Flash
 }
 
-func (o *Price) GetPrice() *float32 {
-	if o == nil {
+func (p *Price) GetPrice() *float32 {
+	if p == nil {
 		return nil
 	}
-	return o.Price
+	return p.Price
 }

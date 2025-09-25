@@ -20,10 +20,10 @@ const (
 
 // SmsMessageRecipients - The recipient number or multiple recipients numbers of single message. To set one recipient, please use `components.CreateSmsMessageRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateSmsMessageRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateSmsMessageRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid()` method passing []PhoneNumberWithCid (in case of multiple recipients).
 type SmsMessageRecipients struct {
-	Str                       *string              `queryParam:"inline"`
-	ArrayOfStr                []string             `queryParam:"inline"`
-	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline"`
-	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline"`
+	Str                       *string              `queryParam:"inline,name=recipients"`
+	ArrayOfStr                []string             `queryParam:"inline,name=recipients"`
+	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline,name=recipients"`
+	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline,name=recipients"`
 
 	Type SmsMessageRecipientsType
 }
@@ -67,28 +67,28 @@ func CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid(arrayOfPhoneNumberWithC
 func (u *SmsMessageRecipients) UnmarshalJSON(data []byte) error {
 
 	var phoneNumberWithCid PhoneNumberWithCid = PhoneNumberWithCid{}
-	if err := utils.UnmarshalJSON(data, &phoneNumberWithCid, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &phoneNumberWithCid, "", true, nil); err == nil {
 		u.PhoneNumberWithCid = &phoneNumberWithCid
 		u.Type = SmsMessageRecipientsTypePhoneNumberWithCid
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = SmsMessageRecipientsTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
-	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
 		u.ArrayOfStr = arrayOfStr
 		u.Type = SmsMessageRecipientsTypeArrayOfStr
 		return nil
 	}
 
 	var arrayOfPhoneNumberWithCid []PhoneNumberWithCid = []PhoneNumberWithCid{}
-	if err := utils.UnmarshalJSON(data, &arrayOfPhoneNumberWithCid, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfPhoneNumberWithCid, "", true, nil); err == nil {
 		u.ArrayOfPhoneNumberWithCid = arrayOfPhoneNumberWithCid
 		u.Type = SmsMessageRecipientsTypeArrayOfPhoneNumberWithCid
 		return nil
@@ -140,57 +140,57 @@ func (s SmsMessage) MarshalJSON() ([]byte, error) {
 }
 
 func (s *SmsMessage) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"recipients", "message"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *SmsMessage) GetRecipients() SmsMessageRecipients {
-	if o == nil {
+func (s *SmsMessage) GetRecipients() SmsMessageRecipients {
+	if s == nil {
 		return SmsMessageRecipients{}
 	}
-	return o.Recipients
+	return s.Recipients
 }
 
-func (o *SmsMessage) GetMessage() string {
-	if o == nil {
+func (s *SmsMessage) GetMessage() string {
+	if s == nil {
 		return ""
 	}
-	return o.Message
+	return s.Message
 }
 
-func (o *SmsMessage) GetSender() *string {
-	if o == nil {
+func (s *SmsMessage) GetSender() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Sender
+	return s.Sender
 }
 
-func (o *SmsMessage) GetType() *SmsType {
-	if o == nil {
+func (s *SmsMessage) GetType() *SmsType {
+	if s == nil {
 		return nil
 	}
-	return o.Type
+	return s.Type
 }
 
-func (o *SmsMessage) GetUnicode() *bool {
-	if o == nil {
+func (s *SmsMessage) GetUnicode() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Unicode
+	return s.Unicode
 }
 
-func (o *SmsMessage) GetFlash() *bool {
-	if o == nil {
+func (s *SmsMessage) GetFlash() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Flash
+	return s.Flash
 }
 
-func (o *SmsMessage) GetDate() *time.Time {
-	if o == nil {
+func (s *SmsMessage) GetDate() *time.Time {
+	if s == nil {
 		return nil
 	}
-	return o.Date
+	return s.Date
 }

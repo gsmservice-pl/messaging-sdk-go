@@ -12,16 +12,16 @@ type PingResponse struct {
 	PingResponse *components.PingResponse
 }
 
-func (o *PingResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (p *PingResponse) GetHTTPMeta() components.HTTPMetadata {
+	if p == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return p.HTTPMeta
 }
 
-func (o *PingResponse) GetPingResponse() *components.PingResponse {
-	if o == nil {
+func (p *PingResponse) GetPingResponse() *components.PingResponse {
+	if p == nil {
 		return nil
 	}
-	return o.PingResponse
+	return p.PingResponse
 }

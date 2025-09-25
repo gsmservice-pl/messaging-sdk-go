@@ -18,8 +18,8 @@ const (
 
 // GetMmsPriceRequestBody - To check the price of a single message or messages with the same content to multiple recipients, pass a single `MmsMessage` object with the properties of this message using `operations.CreateGetMmsPriceRequestBodyMmsMessage()` method. To check the price of multiple messages with different content at the same time, pass a `[]MmsMessage` array with the properties of each message using `operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage()` method.
 type GetMmsPriceRequestBody struct {
-	MmsMessage        *components.MmsMessage  `queryParam:"inline"`
-	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline"`
+	MmsMessage        *components.MmsMessage  `queryParam:"inline,name=requestBody"`
+	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline,name=requestBody"`
 
 	Type GetMmsPriceRequestBodyType
 }
@@ -45,14 +45,14 @@ func CreateGetMmsPriceRequestBodyArrayOfMmsMessage(arrayOfMmsMessage []component
 func (u *GetMmsPriceRequestBody) UnmarshalJSON(data []byte) error {
 
 	var mmsMessage components.MmsMessage = components.MmsMessage{}
-	if err := utils.UnmarshalJSON(data, &mmsMessage, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mmsMessage, "", true, nil); err == nil {
 		u.MmsMessage = &mmsMessage
 		u.Type = GetMmsPriceRequestBodyTypeMmsMessage
 		return nil
 	}
 
 	var arrayOfMmsMessage []components.MmsMessage = []components.MmsMessage{}
-	if err := utils.UnmarshalJSON(data, &arrayOfMmsMessage, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfMmsMessage, "", true, nil); err == nil {
 		u.ArrayOfMmsMessage = arrayOfMmsMessage
 		u.Type = GetMmsPriceRequestBodyTypeArrayOfMmsMessage
 		return nil
@@ -80,23 +80,23 @@ type GetMmsPriceResponse struct {
 	Headers map[string][]string
 }
 
-func (o *GetMmsPriceResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetMmsPriceResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }
 
-func (o *GetMmsPriceResponse) GetPrices() []components.Price {
-	if o == nil {
+func (g *GetMmsPriceResponse) GetPrices() []components.Price {
+	if g == nil {
 		return nil
 	}
-	return o.Prices
+	return g.Prices
 }
 
-func (o *GetMmsPriceResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (g *GetMmsPriceResponse) GetHeaders() map[string][]string {
+	if g == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return g.Headers
 }

@@ -17,20 +17,21 @@ As a successful result a `GetMessagesResponse` object will be returned containin
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getMessages" method="get" path="/messages/{ids}" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.GetByIds(ctx, []int64{
@@ -74,20 +75,21 @@ As a successful result a `CancelMessagesResponse` object will be returned, with 
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="cancelMessages" method="delete" path="/messages/{ids}" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.CancelScheduled(ctx, []int64{
@@ -129,23 +131,24 @@ As a successful result a `ListMessagesResponse` object will be returned containi
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listMessages" method="get" path="/messages" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    res, err := s.Outgoing.List(ctx, nil, nil)
+    res, err := s.Outgoing.List(ctx, v3.Pointer[int64](1), v3.Pointer[int64](10))
     if err != nil {
         log.Fatal(err)
     }

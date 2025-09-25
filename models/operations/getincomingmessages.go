@@ -11,11 +11,11 @@ type GetIncomingMessagesRequest struct {
 	Ids []int64 `pathParam:"style=simple,explode=true,name=ids"`
 }
 
-func (o *GetIncomingMessagesRequest) GetIds() []int64 {
-	if o == nil {
+func (g *GetIncomingMessagesRequest) GetIds() []int64 {
+	if g == nil {
 		return []int64{}
 	}
-	return o.Ids
+	return g.Ids
 }
 
 type GetIncomingMessagesResponse struct {
@@ -25,23 +25,23 @@ type GetIncomingMessagesResponse struct {
 	Headers          map[string][]string
 }
 
-func (o *GetIncomingMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetIncomingMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }
 
-func (o *GetIncomingMessagesResponse) GetIncomingMessages() []components.IncomingMessage {
-	if o == nil {
+func (g *GetIncomingMessagesResponse) GetIncomingMessages() []components.IncomingMessage {
+	if g == nil {
 		return nil
 	}
-	return o.IncomingMessages
+	return g.IncomingMessages
 }
 
-func (o *GetIncomingMessagesResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (g *GetIncomingMessagesResponse) GetHeaders() map[string][]string {
+	if g == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return g.Headers
 }

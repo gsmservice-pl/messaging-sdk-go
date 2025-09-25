@@ -54,58 +54,58 @@ type AccountResponse struct {
 	IsMain *bool `json:"is_main,omitempty"`
 }
 
-func (o *AccountResponse) GetLogin() *string {
-	if o == nil {
+func (a *AccountResponse) GetLogin() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Login
+	return a.Login
 }
 
-func (o *AccountResponse) GetAccountType() *AccountType {
-	if o == nil {
+func (a *AccountResponse) GetAccountType() *AccountType {
+	if a == nil {
 		return nil
 	}
-	return o.AccountType
+	return a.AccountType
 }
 
-func (o *AccountResponse) GetLimit() *float32 {
-	if o == nil {
+func (a *AccountResponse) GetLimit() *float32 {
+	if a == nil {
 		return nil
 	}
-	return o.Limit
+	return a.Limit
 }
 
-func (o *AccountResponse) GetCredit() *float32 {
-	if o == nil {
+func (a *AccountResponse) GetCredit() *float32 {
+	if a == nil {
 		return nil
 	}
-	return o.Credit
+	return a.Credit
 }
 
-func (o *AccountResponse) GetSubcredit() *float32 {
-	if o == nil {
+func (a *AccountResponse) GetSubcredit() *float32 {
+	if a == nil {
 		return nil
 	}
-	return o.Subcredit
+	return a.Subcredit
 }
 
-func (o *AccountResponse) GetCurrency() *string {
-	if o == nil {
+func (a *AccountResponse) GetCurrency() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Currency
+	return a.Currency
 }
 
-func (o *AccountResponse) GetName() *string {
-	if o == nil {
+func (a *AccountResponse) GetName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Name
+	return a.Name
 }
 
-func (o *AccountResponse) GetIsMain() *bool {
-	if o == nil {
+func (a *AccountResponse) GetIsMain() *bool {
+	if a == nil {
 		return nil
 	}
-	return o.IsMain
+	return a.IsMain
 }

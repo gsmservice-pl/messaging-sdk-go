@@ -12,23 +12,23 @@ type PingResponse struct {
 	Sandbox *bool `json:"sandbox,omitempty"`
 }
 
-func (o *PingResponse) GetStatus() *string {
-	if o == nil {
+func (p *PingResponse) GetStatus() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Status
+	return p.Status
 }
 
-func (o *PingResponse) GetVersion() *string {
-	if o == nil {
+func (p *PingResponse) GetVersion() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Version
+	return p.Version
 }
 
-func (o *PingResponse) GetSandbox() *bool {
-	if o == nil {
+func (p *PingResponse) GetSandbox() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Sandbox
+	return p.Sandbox
 }

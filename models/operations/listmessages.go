@@ -19,24 +19,24 @@ func (l ListMessagesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListMessagesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListMessagesRequest) GetPage() *int64 {
-	if o == nil {
+func (l *ListMessagesRequest) GetPage() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Page
+	return l.Page
 }
 
-func (o *ListMessagesRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListMessagesRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
 type ListMessagesResponse struct {
@@ -46,23 +46,23 @@ type ListMessagesResponse struct {
 	Headers  map[string][]string
 }
 
-func (o *ListMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (l *ListMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if l == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return l.HTTPMeta
 }
 
-func (o *ListMessagesResponse) GetMessages() []components.Message {
-	if o == nil {
+func (l *ListMessagesResponse) GetMessages() []components.Message {
+	if l == nil {
 		return nil
 	}
-	return o.Messages
+	return l.Messages
 }
 
-func (o *ListMessagesResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (l *ListMessagesResponse) GetHeaders() map[string][]string {
+	if l == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return l.Headers
 }

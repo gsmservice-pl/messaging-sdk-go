@@ -54,7 +54,7 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
@@ -63,18 +63,17 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v3.New(
+		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
-	res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
-		[]components.SmsMessage{
-			components.SmsMessage{
-				Recipients: components.CreateSmsMessageRecipientsStr(
-					"+48999999999",
-				),
-				Message: "To jest treść wiadomości",
-			},
+	res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
+		components.SmsMessage{
+			Recipients: components.CreateSmsMessageRecipientsStr(
+				"+48999999999",
+			),
+			Message: "This is SMS message content.",
+			Unicode: v3.Pointer(true),
 		},
 	))
 	if err != nil {
@@ -96,7 +95,7 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
@@ -105,22 +104,19 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v3.New(
+		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
 		components.MmsMessage{
-			Recipients: components.CreateRecipientsPhoneNumberWithCid(
-				components.PhoneNumberWithCid{
-					Nr:  "+48999999999",
-					Cid: messagingsdkgo.String("my-id-1113"),
-				},
+			Recipients: components.CreateRecipientsStr(
+				"+48999999999",
 			),
-			Subject: messagingsdkgo.String("To jest temat wiadomości"),
-			Message: messagingsdkgo.String("To jest treść wiadomości"),
-			Attachments: messagingsdkgo.Pointer(components.CreateAttachmentsStr(
-				"<file_body in base64 format>",
+			Subject: v3.Pointer("This is a subject of the message"),
+			Message: v3.Pointer("This is MMS message content."),
+			Attachments: v3.Pointer(components.CreateAttachmentsStr(
+				"<file body in base64 format>",
 			)),
 		},
 	))
@@ -193,7 +189,7 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/retry"
 	"log"
 	"models/operations"
@@ -202,8 +198,8 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v3.New(
+		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx, operations.WithRetries(
@@ -233,7 +229,7 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/retry"
 	"log"
 )
@@ -241,8 +237,8 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := messagingsdkgo.New(
-		messagingsdkgo.WithRetryConfig(
+	s := v3.New(
+		v3.WithRetryConfig(
 			retry.Config{
 				Strategy: "backoff",
 				Backoff: &retry.BackoffStrategy{
@@ -253,7 +249,7 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)
@@ -290,7 +286,7 @@ package main
 import (
 	"context"
 	"errors"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/sdkerrors"
 	"log"
 )
@@ -298,8 +294,8 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v3.New(
+		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)
@@ -347,16 +343,16 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := messagingsdkgo.New(
-		messagingsdkgo.WithServer("sandbox"),
-		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v3.New(
+		v3.WithServer("sandbox"),
+		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)
@@ -378,16 +374,16 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := messagingsdkgo.New(
-		messagingsdkgo.WithServerURL("https://api.szybkisms.pl/rest"),
-		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v3.New(
+		v3.WithServerURL("https://api.szybkisms.pl/rest"),
+		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)
@@ -419,12 +415,13 @@ The built-in `net/http` client satisfies this interface and a default client bas
 import (
 	"net/http"
 	"time"
-	"github.com/myorg/your-go-sdk"
+
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+	sdkClient  = v3.New(v3.WithClient(httpClient))
 )
 ```
 
@@ -448,15 +445,15 @@ package main
 
 import (
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := messagingsdkgo.New(
-		messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v3.New(
+		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)

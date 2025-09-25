@@ -12,16 +12,16 @@ type ListSendersResponse struct {
 	Senders []components.Sender
 }
 
-func (o *ListSendersResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (l *ListSendersResponse) GetHTTPMeta() components.HTTPMetadata {
+	if l == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return l.HTTPMeta
 }
 
-func (o *ListSendersResponse) GetSenders() []components.Sender {
-	if o == nil {
+func (l *ListSendersResponse) GetSenders() []components.Sender {
+	if l == nil {
 		return nil
 	}
-	return o.Senders
+	return l.Senders
 }

@@ -11,11 +11,11 @@ type DeleteSenderRequest struct {
 	Sender string `pathParam:"style=simple,explode=false,name=sender"`
 }
 
-func (o *DeleteSenderRequest) GetSender() string {
-	if o == nil {
+func (d *DeleteSenderRequest) GetSender() string {
+	if d == nil {
 		return ""
 	}
-	return o.Sender
+	return d.Sender
 }
 
 type DeleteSenderResponse struct {
@@ -23,16 +23,16 @@ type DeleteSenderResponse struct {
 	Headers  map[string][]string
 }
 
-func (o *DeleteSenderResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (d *DeleteSenderResponse) GetHTTPMeta() components.HTTPMetadata {
+	if d == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return d.HTTPMeta
 }
 
-func (o *DeleteSenderResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (d *DeleteSenderResponse) GetHeaders() map[string][]string {
+	if d == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return d.Headers
 }

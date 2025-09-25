@@ -12,16 +12,16 @@ type GetAccountDetailsResponse struct {
 	AccountResponse *components.AccountResponse
 }
 
-func (o *GetAccountDetailsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetAccountDetailsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }
 
-func (o *GetAccountDetailsResponse) GetAccountResponse() *components.AccountResponse {
-	if o == nil {
+func (g *GetAccountDetailsResponse) GetAccountResponse() *components.AccountResponse {
+	if g == nil {
 		return nil
 	}
-	return o.AccountResponse
+	return g.AccountResponse
 }

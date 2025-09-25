@@ -11,11 +11,11 @@ type SetDefaultSenderRequest struct {
 	Sender string `pathParam:"style=simple,explode=false,name=sender"`
 }
 
-func (o *SetDefaultSenderRequest) GetSender() string {
-	if o == nil {
+func (s *SetDefaultSenderRequest) GetSender() string {
+	if s == nil {
 		return ""
 	}
-	return o.Sender
+	return s.Sender
 }
 
 type SetDefaultSenderResponse struct {
@@ -23,16 +23,16 @@ type SetDefaultSenderResponse struct {
 	Headers  map[string][]string
 }
 
-func (o *SetDefaultSenderResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SetDefaultSenderResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SetDefaultSenderResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SetDefaultSenderResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

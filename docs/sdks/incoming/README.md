@@ -18,23 +18,24 @@ As a successful result a `ListIncomingMessagesResponse` object will be returned 
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listIncomingMessages" method="get" path="/incoming" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    res, err := s.Incoming.List(ctx, nil, nil)
+    res, err := s.Incoming.List(ctx, v3.Pointer[int64](1), v3.Pointer[int64](10))
     if err != nil {
         log.Fatal(err)
     }
@@ -74,20 +75,21 @@ As a successful result a `GetIncomingMessagesResponse` object will be returned w
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getIncomingMessages" method="get" path="/incoming/{ids}" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Incoming.GetByIds(ctx, []int64{

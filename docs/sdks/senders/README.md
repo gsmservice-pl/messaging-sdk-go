@@ -18,20 +18,21 @@ As a successful result a `ListSendersResponse` object will be returned witch `Se
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listSenders" method="get" path="/senders" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Senders.List(ctx)
@@ -70,12 +71,13 @@ As a successful result a `AddSenderResponse` object will be returned with a `Sen
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="addSender" method="post" path="/senders" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
 	"log"
 )
@@ -83,8 +85,8 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Senders.Add(ctx, components.SenderInput{
@@ -127,20 +129,21 @@ As a successful response there would be `DeleteSenderResponse` object returned w
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="deleteSender" method="delete" path="/senders/{sender}" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Senders.Delete(ctx, "Podpis")
@@ -180,20 +183,21 @@ As a successful response a `SetDefaultSenderResponse` object will be returned no
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="setDefaultSender" method="patch" path="/senders/{sender}" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Senders.SetDefault(ctx, "Podpis")

@@ -12,23 +12,23 @@ type Sender struct {
 	IsDefault bool `json:"is_default"`
 }
 
-func (o *Sender) GetSender() string {
-	if o == nil {
+func (s *Sender) GetSender() string {
+	if s == nil {
 		return ""
 	}
-	return o.Sender
+	return s.Sender
 }
 
-func (o *Sender) GetStatus() string {
-	if o == nil {
+func (s *Sender) GetStatus() string {
+	if s == nil {
 		return ""
 	}
-	return o.Status
+	return s.Status
 }
 
-func (o *Sender) GetIsDefault() bool {
-	if o == nil {
+func (s *Sender) GetIsDefault() bool {
+	if s == nil {
 		return false
 	}
-	return o.IsDefault
+	return s.IsDefault
 }

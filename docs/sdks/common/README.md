@@ -15,19 +15,20 @@ As a successful result a `PingResponse` object will be returned.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="ping" method="get" path="/ping" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New()
+    s := v3.New()
 
     res, err := s.Common.Ping(ctx)
     if err != nil {

@@ -11,11 +11,11 @@ type GetSubaccountDetailsRequest struct {
 	UserLogin string `pathParam:"style=simple,explode=true,name=user_login"`
 }
 
-func (o *GetSubaccountDetailsRequest) GetUserLogin() string {
-	if o == nil {
+func (g *GetSubaccountDetailsRequest) GetUserLogin() string {
+	if g == nil {
 		return ""
 	}
-	return o.UserLogin
+	return g.UserLogin
 }
 
 type GetSubaccountDetailsResponse struct {
@@ -24,16 +24,16 @@ type GetSubaccountDetailsResponse struct {
 	AccountResponse *components.AccountResponse
 }
 
-func (o *GetSubaccountDetailsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetSubaccountDetailsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }
 
-func (o *GetSubaccountDetailsResponse) GetAccountResponse() *components.AccountResponse {
-	if o == nil {
+func (g *GetSubaccountDetailsResponse) GetAccountResponse() *components.AccountResponse {
+	if g == nil {
 		return nil
 	}
-	return o.AccountResponse
+	return g.AccountResponse
 }

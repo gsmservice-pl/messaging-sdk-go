@@ -34,71 +34,71 @@ func (i IncomingMessage) MarshalJSON() ([]byte, error) {
 }
 
 func (i *IncomingMessage) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *IncomingMessage) GetID() *int64 {
-	if o == nil {
+func (i *IncomingMessage) GetID() *int64 {
+	if i == nil {
 		return nil
 	}
-	return o.ID
+	return i.ID
 }
 
-func (o *IncomingMessage) GetLogin() *string {
-	if o == nil {
+func (i *IncomingMessage) GetLogin() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Login
+	return i.Login
 }
 
-func (o *IncomingMessage) GetRecipient() *string {
-	if o == nil {
+func (i *IncomingMessage) GetRecipient() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Recipient
+	return i.Recipient
 }
 
-func (o *IncomingMessage) GetSender() *string {
-	if o == nil {
+func (i *IncomingMessage) GetSender() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Sender
+	return i.Sender
 }
 
-func (o *IncomingMessage) GetPhonebookSenderName() *string {
-	if o == nil {
+func (i *IncomingMessage) GetPhonebookSenderName() *string {
+	if i == nil {
 		return nil
 	}
-	return o.PhonebookSenderName
+	return i.PhonebookSenderName
 }
 
-func (o *IncomingMessage) GetDate() *time.Time {
-	if o == nil {
+func (i *IncomingMessage) GetDate() *time.Time {
+	if i == nil {
 		return nil
 	}
-	return o.Date
+	return i.Date
 }
 
-func (o *IncomingMessage) GetMessage() *string {
-	if o == nil {
+func (i *IncomingMessage) GetMessage() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Message
+	return i.Message
 }
 
-func (o *IncomingMessage) GetDedicatedNumber() *string {
-	if o == nil {
+func (i *IncomingMessage) GetDedicatedNumber() *string {
+	if i == nil {
 		return nil
 	}
-	return o.DedicatedNumber
+	return i.DedicatedNumber
 }
 
-func (o *IncomingMessage) GetDedicatedPrefix() *string {
-	if o == nil {
+func (i *IncomingMessage) GetDedicatedPrefix() *string {
+	if i == nil {
 		return nil
 	}
-	return o.DedicatedPrefix
+	return i.DedicatedPrefix
 }

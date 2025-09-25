@@ -10,16 +10,16 @@ type SenderInput struct {
 	Description string `json:"description"`
 }
 
-func (o *SenderInput) GetSender() string {
-	if o == nil {
+func (s *SenderInput) GetSender() string {
+	if s == nil {
 		return ""
 	}
-	return o.Sender
+	return s.Sender
 }
 
-func (o *SenderInput) GetDescription() string {
-	if o == nil {
+func (s *SenderInput) GetDescription() string {
+	if s == nil {
 		return ""
 	}
-	return o.Description
+	return s.Description
 }

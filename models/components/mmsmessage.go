@@ -20,10 +20,10 @@ const (
 
 // Recipients - The recipient number or multiple recipients numbers of single message. To set one recipient, simply use `components.CreateRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateRecipientsArrayOfPhoneNumberWithCid()` method passing `[]PhoneNumberWithCid` (in case of multiple recipients).
 type Recipients struct {
-	Str                       *string              `queryParam:"inline"`
-	ArrayOfStr                []string             `queryParam:"inline"`
-	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline"`
-	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline"`
+	Str                       *string              `queryParam:"inline,name=recipients"`
+	ArrayOfStr                []string             `queryParam:"inline,name=recipients"`
+	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline,name=recipients"`
+	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline,name=recipients"`
 
 	Type RecipientsType
 }
@@ -67,28 +67,28 @@ func CreateRecipientsArrayOfPhoneNumberWithCid(arrayOfPhoneNumberWithCid []Phone
 func (u *Recipients) UnmarshalJSON(data []byte) error {
 
 	var phoneNumberWithCid PhoneNumberWithCid = PhoneNumberWithCid{}
-	if err := utils.UnmarshalJSON(data, &phoneNumberWithCid, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &phoneNumberWithCid, "", true, nil); err == nil {
 		u.PhoneNumberWithCid = &phoneNumberWithCid
 		u.Type = RecipientsTypePhoneNumberWithCid
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = RecipientsTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
-	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
 		u.ArrayOfStr = arrayOfStr
 		u.Type = RecipientsTypeArrayOfStr
 		return nil
 	}
 
 	var arrayOfPhoneNumberWithCid []PhoneNumberWithCid = []PhoneNumberWithCid{}
-	if err := utils.UnmarshalJSON(data, &arrayOfPhoneNumberWithCid, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfPhoneNumberWithCid, "", true, nil); err == nil {
 		u.ArrayOfPhoneNumberWithCid = arrayOfPhoneNumberWithCid
 		u.Type = RecipientsTypeArrayOfPhoneNumberWithCid
 		return nil
@@ -126,8 +126,8 @@ const (
 
 // Attachments for the message. You can pass here images, audio and video files bodies. To set one attachment please use `components.CreateAttachmentsStr()` method simply passing to it a `string` with attachment body encoded with `base64`. To set multiple attachments - please use `components.CreateAttachmentsArrayOfStr()` method passing to it `[]string` with attachment bodies encoded by `base64`. Max 3 attachments per message.
 type Attachments struct {
-	Str        *string  `queryParam:"inline"`
-	ArrayOfStr []string `queryParam:"inline"`
+	Str        *string  `queryParam:"inline,name=attachments"`
+	ArrayOfStr []string `queryParam:"inline,name=attachments"`
 
 	Type AttachmentsType
 }
@@ -153,14 +153,14 @@ func CreateAttachmentsArrayOfStr(arrayOfStr []string) Attachments {
 func (u *Attachments) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = AttachmentsTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
-	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
 		u.ArrayOfStr = arrayOfStr
 		u.Type = AttachmentsTypeArrayOfStr
 		return nil
@@ -200,43 +200,43 @@ func (m MmsMessage) MarshalJSON() ([]byte, error) {
 }
 
 func (m *MmsMessage) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, []string{"recipients"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *MmsMessage) GetRecipients() Recipients {
-	if o == nil {
+func (m *MmsMessage) GetRecipients() Recipients {
+	if m == nil {
 		return Recipients{}
 	}
-	return o.Recipients
+	return m.Recipients
 }
 
-func (o *MmsMessage) GetSubject() *string {
-	if o == nil {
+func (m *MmsMessage) GetSubject() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Subject
+	return m.Subject
 }
 
-func (o *MmsMessage) GetMessage() *string {
-	if o == nil {
+func (m *MmsMessage) GetMessage() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Message
+	return m.Message
 }
 
-func (o *MmsMessage) GetAttachments() *Attachments {
-	if o == nil {
+func (m *MmsMessage) GetAttachments() *Attachments {
+	if m == nil {
 		return nil
 	}
-	return o.Attachments
+	return m.Attachments
 }
 
-func (o *MmsMessage) GetDate() *time.Time {
-	if o == nil {
+func (m *MmsMessage) GetDate() *time.Time {
+	if m == nil {
 		return nil
 	}
-	return o.Date
+	return m.Date
 }

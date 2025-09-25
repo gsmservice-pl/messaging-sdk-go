@@ -12,23 +12,23 @@ type CancelledMessage struct {
 	Error *ErrorResponse `json:"error,omitempty"`
 }
 
-func (o *CancelledMessage) GetID() *int64 {
-	if o == nil {
+func (c *CancelledMessage) GetID() *int64 {
+	if c == nil {
 		return nil
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *CancelledMessage) GetStatus() *int64 {
-	if o == nil {
+func (c *CancelledMessage) GetStatus() *int64 {
+	if c == nil {
 		return nil
 	}
-	return o.Status
+	return c.Status
 }
 
-func (o *CancelledMessage) GetError() *ErrorResponse {
-	if o == nil {
+func (c *CancelledMessage) GetError() *ErrorResponse {
+	if c == nil {
 		return nil
 	}
-	return o.Error
+	return c.Error
 }

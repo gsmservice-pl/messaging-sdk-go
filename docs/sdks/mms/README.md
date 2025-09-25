@@ -19,12 +19,13 @@ As a successful result a `GetMmsPriceResponse` object will be returned with `Pri
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getMmsPrice" method="post" path="/messages/mms/price" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
@@ -33,24 +34,20 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage(
-        []components.MmsMessage{
-            components.MmsMessage{
-                Recipients: components.CreateRecipientsArrayOfStr(
-                    []string{
-                        "+48999999999",
-                    },
-                ),
-                Subject: messagingsdkgo.String("To jest temat wiadomości"),
-                Message: messagingsdkgo.String("To jest treść wiadomości"),
-                Attachments: messagingsdkgo.Pointer(components.CreateAttachmentsStr(
-                    "<file_body in base64 format>",
-                )),
-            },
+    res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyMmsMessage(
+        components.MmsMessage{
+            Recipients: components.CreateRecipientsStr(
+                "+48999999999",
+            ),
+            Subject: v3.Pointer("This is a subject of the message"),
+            Message: v3.Pointer("This is MMS message content."),
+            Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                "<file body in base64 format>",
+            )),
         },
     ))
     if err != nil {
@@ -91,12 +88,13 @@ As a successful result a `SendMmsResponse` object will be returned with `Message
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="sendMms" method="post" path="/messages/mms" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
 	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
 	"log"
@@ -105,22 +103,19 @@ import(
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
         components.MmsMessage{
-            Recipients: components.CreateRecipientsPhoneNumberWithCid(
-                components.PhoneNumberWithCid{
-                    Nr: "+48999999999",
-                    Cid: messagingsdkgo.String("my-id-1113"),
-                },
+            Recipients: components.CreateRecipientsStr(
+                "+48999999999",
             ),
-            Subject: messagingsdkgo.String("To jest temat wiadomości"),
-            Message: messagingsdkgo.String("To jest treść wiadomości"),
-            Attachments: messagingsdkgo.Pointer(components.CreateAttachmentsStr(
-                "<file_body in base64 format>",
+            Subject: v3.Pointer("This is a subject of the message"),
+            Message: v3.Pointer("This is MMS message content."),
+            Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                "<file body in base64 format>",
             )),
         },
     ))

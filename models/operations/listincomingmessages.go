@@ -19,24 +19,24 @@ func (l ListIncomingMessagesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListIncomingMessagesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListIncomingMessagesRequest) GetPage() *int64 {
-	if o == nil {
+func (l *ListIncomingMessagesRequest) GetPage() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Page
+	return l.Page
 }
 
-func (o *ListIncomingMessagesRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListIncomingMessagesRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
 type ListIncomingMessagesResponse struct {
@@ -46,23 +46,23 @@ type ListIncomingMessagesResponse struct {
 	Headers          map[string][]string
 }
 
-func (o *ListIncomingMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (l *ListIncomingMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if l == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return l.HTTPMeta
 }
 
-func (o *ListIncomingMessagesResponse) GetIncomingMessages() []components.IncomingMessage {
-	if o == nil {
+func (l *ListIncomingMessagesResponse) GetIncomingMessages() []components.IncomingMessage {
+	if l == nil {
 		return nil
 	}
-	return o.IncomingMessages
+	return l.IncomingMessages
 }
 
-func (o *ListIncomingMessagesResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (l *ListIncomingMessagesResponse) GetHeaders() map[string][]string {
+	if l == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return l.Headers
 }

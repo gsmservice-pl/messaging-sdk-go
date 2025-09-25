@@ -18,44 +18,44 @@ type ErrorResponse struct {
 	Instance *string `json:"instance,omitempty"`
 }
 
-func (o *ErrorResponse) GetType() *string {
-	if o == nil {
+func (e *ErrorResponse) GetType() *string {
+	if e == nil {
 		return nil
 	}
-	return o.Type
+	return e.Type
 }
 
-func (o *ErrorResponse) GetStatus() *int64 {
-	if o == nil {
+func (e *ErrorResponse) GetStatus() *int64 {
+	if e == nil {
 		return nil
 	}
-	return o.Status
+	return e.Status
 }
 
-func (o *ErrorResponse) GetTitle() *string {
-	if o == nil {
+func (e *ErrorResponse) GetTitle() *string {
+	if e == nil {
 		return nil
 	}
-	return o.Title
+	return e.Title
 }
 
-func (o *ErrorResponse) GetDetail() *string {
-	if o == nil {
+func (e *ErrorResponse) GetDetail() *string {
+	if e == nil {
 		return nil
 	}
-	return o.Detail
+	return e.Detail
 }
 
-func (o *ErrorResponse) GetCode() *string {
-	if o == nil {
+func (e *ErrorResponse) GetCode() *string {
+	if e == nil {
 		return nil
 	}
-	return o.Code
+	return e.Code
 }
 
-func (o *ErrorResponse) GetInstance() *string {
-	if o == nil {
+func (e *ErrorResponse) GetInstance() *string {
+	if e == nil {
 		return nil
 	}
-	return o.Instance
+	return e.Instance
 }

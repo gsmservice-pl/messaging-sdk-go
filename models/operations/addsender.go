@@ -13,23 +13,23 @@ type AddSenderResponse struct {
 	Headers map[string][]string
 }
 
-func (o *AddSenderResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (a *AddSenderResponse) GetHTTPMeta() components.HTTPMetadata {
+	if a == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return a.HTTPMeta
 }
 
-func (o *AddSenderResponse) GetSender() *components.Sender {
-	if o == nil {
+func (a *AddSenderResponse) GetSender() *components.Sender {
+	if a == nil {
 		return nil
 	}
-	return o.Sender
+	return a.Sender
 }
 
-func (o *AddSenderResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (a *AddSenderResponse) GetHeaders() map[string][]string {
+	if a == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return a.Headers
 }

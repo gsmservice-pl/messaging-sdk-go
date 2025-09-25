@@ -11,11 +11,11 @@ type CancelMessagesRequest struct {
 	Ids []int64 `pathParam:"style=simple,explode=true,name=ids"`
 }
 
-func (o *CancelMessagesRequest) GetIds() []int64 {
-	if o == nil {
+func (c *CancelMessagesRequest) GetIds() []int64 {
+	if c == nil {
 		return []int64{}
 	}
-	return o.Ids
+	return c.Ids
 }
 
 type CancelMessagesResponse struct {
@@ -25,23 +25,23 @@ type CancelMessagesResponse struct {
 	Headers           map[string][]string
 }
 
-func (o *CancelMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (c *CancelMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if c == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return c.HTTPMeta
 }
 
-func (o *CancelMessagesResponse) GetCancelledMessages() []components.CancelledMessage {
-	if o == nil {
+func (c *CancelMessagesResponse) GetCancelledMessages() []components.CancelledMessage {
+	if c == nil {
 		return nil
 	}
-	return o.CancelledMessages
+	return c.CancelledMessages
 }
 
-func (o *CancelMessagesResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (c *CancelMessagesResponse) GetHeaders() map[string][]string {
+	if c == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return c.Headers
 }

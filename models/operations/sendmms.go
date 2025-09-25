@@ -18,8 +18,8 @@ const (
 
 // SendMmsRequestBody - To send a single MMS or messages with the same content to multiple recipients, please use `operations.CreateSendMmsRequestBodyMmsMessage()` method with a single `MmsMessage` object with the properties of this message. To send multiple messages with different content at the same time, please use `operations.CreateSendMmsRequestBodyArrayOfMmsMessage()` method passing to it array of type `[]MmsMessage` with the properties of each message.
 type SendMmsRequestBody struct {
-	MmsMessage        *components.MmsMessage  `queryParam:"inline"`
-	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline"`
+	MmsMessage        *components.MmsMessage  `queryParam:"inline,name=requestBody"`
+	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline,name=requestBody"`
 
 	Type SendMmsRequestBodyType
 }
@@ -45,14 +45,14 @@ func CreateSendMmsRequestBodyArrayOfMmsMessage(arrayOfMmsMessage []components.Mm
 func (u *SendMmsRequestBody) UnmarshalJSON(data []byte) error {
 
 	var mmsMessage components.MmsMessage = components.MmsMessage{}
-	if err := utils.UnmarshalJSON(data, &mmsMessage, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mmsMessage, "", true, nil); err == nil {
 		u.MmsMessage = &mmsMessage
 		u.Type = SendMmsRequestBodyTypeMmsMessage
 		return nil
 	}
 
 	var arrayOfMmsMessage []components.MmsMessage = []components.MmsMessage{}
-	if err := utils.UnmarshalJSON(data, &arrayOfMmsMessage, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfMmsMessage, "", true, nil); err == nil {
 		u.ArrayOfMmsMessage = arrayOfMmsMessage
 		u.Type = SendMmsRequestBodyTypeArrayOfMmsMessage
 		return nil
@@ -80,23 +80,23 @@ type SendMmsResponse struct {
 	Headers  map[string][]string
 }
 
-func (o *SendMmsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SendMmsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SendMmsResponse) GetMessages() []components.Message {
-	if o == nil {
+func (s *SendMmsResponse) GetMessages() []components.Message {
+	if s == nil {
 		return nil
 	}
-	return o.Messages
+	return s.Messages
 }
 
-func (o *SendMmsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SendMmsResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

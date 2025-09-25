@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/internal/utils"
+)
+
 // PhoneNumberWithCid - An object defining the message recipient telephone number with the message's custom identifier assigned by the User
 type PhoneNumberWithCid struct {
 	// A telephone number in international format (with a plus sign and the country code at the beginning, e.g. +48 for Poland)
@@ -10,16 +14,27 @@ type PhoneNumberWithCid struct {
 	Cid *string `json:"cid,omitempty"`
 }
 
-func (o *PhoneNumberWithCid) GetNr() string {
-	if o == nil {
-		return ""
-	}
-	return o.Nr
+func (p PhoneNumberWithCid) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
 }
 
-func (o *PhoneNumberWithCid) GetCid() *string {
-	if o == nil {
+func (p *PhoneNumberWithCid) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"nr"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (p *PhoneNumberWithCid) GetNr() string {
+	if p == nil {
+		return ""
+	}
+	return p.Nr
+}
+
+func (p *PhoneNumberWithCid) GetCid() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Cid
+	return p.Cid
 }

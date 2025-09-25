@@ -16,20 +16,21 @@ As a successful result a details of current account you are logged in using an A
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getAccountDetails" method="get" path="/account" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Accounts.Get(ctx)
@@ -70,20 +71,21 @@ As a successful result the details of subaccount with provided login will be ret
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getSubaccountDetails" method="get" path="/account/{user_login}" -->
 ```go
 package main
 
 import(
 	"context"
-	messagingsdkgo "github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := messagingsdkgo.New(
-        messagingsdkgo.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Accounts.GetSubaccount(ctx, "some-login")
