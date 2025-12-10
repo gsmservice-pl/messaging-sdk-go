@@ -20,7 +20,7 @@ func (r *RemoveIncomingMessagesRequest) GetIds() []int64 {
 
 type RemoveIncomingMessagesResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	// The request was processed successfully. Please check the status of removing incoming messages in response body.
+	// The request was processed successfully. Please check the status of incoming messages in response body.
 	RemovedIncomingMessages []components.RemovedIncomingMessage
 	Headers                 map[string][]string
 }

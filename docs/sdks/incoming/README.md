@@ -6,7 +6,7 @@
 
 * [List](#list) - List the received SMS messages
 * [GetByIds](#getbyids) - Get the incoming messages by IDs
-* [RemoveByIds](#removebyids) - Remove an incoming messages from your inbox
+* [RemoveByIds](#removebyids) - Remove the incoming messages from your inbox
 
 ## List
 

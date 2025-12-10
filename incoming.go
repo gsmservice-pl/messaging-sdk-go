@@ -552,7 +552,7 @@ func (s *Incoming) GetByIds(ctx context.Context, ids []int64, opts ...operations
 
 }
 
-// RemoveByIds - Remove an incoming messages from your inbox
+// RemoveByIds - Remove the incoming messages from your inbox
 // Remove incoming messages from your inbox using their `ids`. You have to pass the unique incoming message IDs as path parameter. If you want to remove multiple incoming messages at once, please separate their IDs with a comma. The system will accept maximum 50 identifiers in one call. If you need to remove larger volume of incoming messages, please split it to several separate requests.
 //
 // As a successful result an array with `RemovedIncomingMessage` objects will be returned, each object per single incoming message id. The `status` property will contain a status code of operation - `204` if incoming message was removed successfully and other code if an error occured with removing a given incoming message. In case of an error, an `error` property will contain `ErrorResponse` object with the details of an error.
