@@ -14,3 +14,14 @@ const (
 func (e SmsType) ToPointer() *SmsType {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *SmsType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case 1, 3, 4:
+			return true
+		}
+	}
+	return false
+}

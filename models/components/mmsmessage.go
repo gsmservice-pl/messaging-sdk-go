@@ -20,10 +20,10 @@ const (
 
 // Recipients - The recipient number or multiple recipients numbers of single message. To set one recipient, simply use `components.CreateRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateRecipientsArrayOfPhoneNumberWithCid()` method passing `[]PhoneNumberWithCid` (in case of multiple recipients).
 type Recipients struct {
-	Str                       *string              `queryParam:"inline,name=recipients"`
-	ArrayOfStr                []string             `queryParam:"inline,name=recipients"`
-	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline,name=recipients"`
-	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline,name=recipients"`
+	Str                       *string              `queryParam:"inline,name=recipients" union:"member"`
+	ArrayOfStr                []string             `queryParam:"inline,name=recipients" union:"member"`
+	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline,name=recipients" union:"member"`
+	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline,name=recipients" union:"member"`
 
 	Type RecipientsType
 }
@@ -126,8 +126,8 @@ const (
 
 // Attachments for the message. You can pass here images, audio and video files bodies. To set one attachment please use `components.CreateAttachmentsStr()` method simply passing to it a `string` with attachment body encoded with `base64`. To set multiple attachments - please use `components.CreateAttachmentsArrayOfStr()` method passing to it `[]string` with attachment bodies encoded by `base64`. Max 3 attachments per message.
 type Attachments struct {
-	Str        *string  `queryParam:"inline,name=attachments"`
-	ArrayOfStr []string `queryParam:"inline,name=attachments"`
+	Str        *string  `queryParam:"inline,name=attachments" union:"member"`
+	ArrayOfStr []string `queryParam:"inline,name=attachments" union:"member"`
 
 	Type AttachmentsType
 }

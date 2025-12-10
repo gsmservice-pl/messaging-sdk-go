@@ -142,7 +142,6 @@ func main() {
 * [Get](docs/sdks/accounts/README.md#get) - Get account details
 * [GetSubaccount](docs/sdks/accounts/README.md#getsubaccount) - Get subaccount details
 
-
 ### [Common](docs/sdks/common/README.md)
 
 * [Ping](docs/sdks/common/README.md#ping) - Checks API availability and version
@@ -151,6 +150,7 @@ func main() {
 
 * [List](docs/sdks/incoming/README.md#list) - List the received SMS messages
 * [GetByIds](docs/sdks/incoming/README.md#getbyids) - Get the incoming messages by IDs
+* [RemoveByIds](docs/sdks/incoming/README.md#removebyids) - Remove the incoming messages from your inbox
 
 ### [Outgoing](docs/sdks/outgoing/README.md)
 
@@ -351,7 +351,7 @@ func main() {
 	ctx := context.Background()
 
 	s := v3.New(
-		v3.WithServer("sandbox"),
+		v3.WithServer("prod"),
 		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
