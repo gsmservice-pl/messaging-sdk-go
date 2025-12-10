@@ -6,7 +6,7 @@ package components
 type RemovedIncomingMessage struct {
 	// Incoming Message ID
 	ID *int64 `json:"id,omitempty"`
-	// Status of removing (204 if cancelled successfully or error status code)
+	// Status of removing (204 if removed successfully or error status code)
 	Status *int64 `json:"status,omitempty"`
 	// An object that complies with RFC 9457 containing information about a request error
 	Error *ErrorResponse `json:"error,omitempty"`

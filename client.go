@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 1.2.2 and generator version 2.778.5
+// Generated from OpenAPI doc version 1.2.3 and generator version 2.779.0
 
 import (
 	"context"
@@ -170,9 +170,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Client {
 	sdk := &Client{
-		SDKVersion: "3.2.1",
+		SDKVersion: "3.2.2",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.2.1 2.778.5 1.2.2 github.com/gsmservice-pl/messaging-sdk-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.2.2 2.779.0 1.2.3 github.com/gsmservice-pl/messaging-sdk-go/v3",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),

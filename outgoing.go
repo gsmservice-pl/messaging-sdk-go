@@ -36,10 +36,12 @@ func newOutgoing(rootSDK *Client, sdkConfig config.SDKConfiguration, hooks *hook
 	}
 }
 
-// GetByIds - Get the messages details and status by IDs
-// Check the current status and details of one or more messages using their `ids`. You have to pass an array of type `[]int64` containing unique message *IDs* which details you want to fetch. This method will accept maximum 50 identifiers in one call.
+// GetByIds - Get the incoming messages by IDs
+// Get the details of one or more received messages using their `ids`. This method accepts an array of type `[]int64` containing unique incoming message *IDs*, which were given while receiving a messages. The method will accept maximum 50 identifiers in one call.
 //
-// As a successful result a `GetMessagesResponse` object will be returned containing `Messages` property of type `[]Message` with `Message` objects, each object per single found message. `GetMessagesResponse` object will also contain `Headers` property where you can find `X-Success-Count` (a count of messages which were found and returned correctly) and `X-Error-Count` (count of messages which were not found) elements.
+// As a successful result a `GetIncomingMessagesResponse` object will be returned with an `IncomingMessages` property of type `[]IncomingMessage` containing `IncomingMessage` objects, each object per single received message.
+//
+// `GetIncomingMessagesResponse` object will contain also a `Headers` property where you can find `X-Success-Count` (a count of incoming messages which were found and returned correctly) and `X-Error-Count` (count of incoming messages which were not found) elements.
 func (s *Outgoing) GetByIds(ctx context.Context, ids []int64, opts ...operations.Option) (*operations.GetMessagesResponse, error) {
 	request := operations.GetMessagesRequest{
 		Ids: ids,
