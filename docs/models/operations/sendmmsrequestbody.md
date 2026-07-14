@@ -17,3 +17,15 @@ sendMmsRequestBody := operations.CreateSendMmsRequestBodyMmsMessage(components.M
 sendMmsRequestBody := operations.CreateSendMmsRequestBodyArrayOfMmsMessage([]components.MmsMessage{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch sendMmsRequestBody.Type {
+	case operations.SendMmsRequestBodyTypeMmsMessage:
+		// sendMmsRequestBody.MmsMessage is populated
+	case operations.SendMmsRequestBodyTypeArrayOfMmsMessage:
+		// sendMmsRequestBody.ArrayOfMmsMessage is populated
+}
+```

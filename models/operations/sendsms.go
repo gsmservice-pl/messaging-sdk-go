@@ -18,8 +18,8 @@ const (
 
 // SendSmsRequestBody - To send a single SMS or messages with the same content to multiple recipients, please use `operations.CreateSendSmsRequestBodySmsMessage()` method with a single `SmsMessage` object with the properties of this message. To send multiple messages with different content at the same time, please use `operations.CreateSendSmsRequestBodyArrayOfSmsMessage()` method passing to it array of type `[]SmsMessage` with the properties of each message.
 type SendSmsRequestBody struct {
-	SmsMessage        *components.SmsMessage  `queryParam:"inline,name=requestBody" union:"member"`
-	ArrayOfSmsMessage []components.SmsMessage `queryParam:"inline,name=requestBody" union:"member"`
+	SmsMessage        *components.SmsMessage  `queryParam:"inline" union:"member"`
+	ArrayOfSmsMessage []components.SmsMessage `queryParam:"inline" union:"member"`
 
 	Type SendSmsRequestBodyType
 }

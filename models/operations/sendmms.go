@@ -18,8 +18,8 @@ const (
 
 // SendMmsRequestBody - To send a single MMS or messages with the same content to multiple recipients, please use `operations.CreateSendMmsRequestBodyMmsMessage()` method with a single `MmsMessage` object with the properties of this message. To send multiple messages with different content at the same time, please use `operations.CreateSendMmsRequestBodyArrayOfMmsMessage()` method passing to it array of type `[]MmsMessage` with the properties of each message.
 type SendMmsRequestBody struct {
-	MmsMessage        *components.MmsMessage  `queryParam:"inline,name=requestBody" union:"member"`
-	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline,name=requestBody" union:"member"`
+	MmsMessage        *components.MmsMessage  `queryParam:"inline" union:"member"`
+	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline" union:"member"`
 
 	Type SendMmsRequestBodyType
 }

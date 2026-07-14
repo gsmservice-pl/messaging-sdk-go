@@ -16,9 +16,215 @@ As a successful result a `GetMmsPriceResponse` object will be returned with `Pri
 
 `GetSmsPriceResponse` object will include also `Headers` property with `X-Success-Count` (a count of messages which were processed successfully) and `X-Error-Count` (count of messages which were rejected) elements.
 
-### Example Usage
+### Example Usage: bulk
 
-<!-- UsageSnippet language="go" operationID="getMmsPrice" method="post" path="/messages/mms/price" -->
+<!-- UsageSnippet language="go" operationID="getMmsPrice" method="post" path="/messages/mms/price" example="bulk" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage(
+        []components.MmsMessage{
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsStr(
+                    "+48999999999",
+                ),
+                Subject: v3.Pointer("This is a subject of the first message"),
+                Message: v3.Pointer("This is first MMS message content"),
+                Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                    "<file 1 body in base64 format>",
+                )),
+            },
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsStr(
+                    "+48999888777",
+                ),
+                Subject: v3.Pointer("This is a subject of the second message"),
+                Message: v3.Pointer("This is second MMS message content"),
+                Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                    "<file 2 body in base64 format>",
+                )),
+            },
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: bulk_cid
+
+<!-- UsageSnippet language="go" operationID="getMmsPrice" method="post" path="/messages/mms/price" example="bulk_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage(
+        []components.MmsMessage{
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsPhoneNumberWithCid(
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999999999",
+                        Cid: v3.Pointer("custom-id-A44445T"),
+                    },
+                ),
+                Subject: v3.Pointer("This is a subject of the first message"),
+                Message: v3.Pointer("This is first MMS message content"),
+                Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                    "<file 1 body in base64 format>",
+                )),
+            },
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsPhoneNumberWithCid(
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999888777",
+                        Cid: v3.Pointer("custom-id-F44445R"),
+                    },
+                ),
+                Subject: v3.Pointer("This is a subject of the second message"),
+                Message: v3.Pointer("This is second MMS message content"),
+                Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                    "<file 2 body in base64 format>",
+                )),
+            },
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multi
+
+<!-- UsageSnippet language="go" operationID="getMmsPrice" method="post" path="/messages/mms/price" example="multi" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyMmsMessage(
+        components.MmsMessage{
+            Recipients: components.CreateRecipientsArrayOfStr(
+                []string{
+                    "+48999999999",
+                    "+48999888777",
+                },
+            ),
+            Subject: v3.Pointer("This is a subject of the message"),
+            Message: v3.Pointer("This is MMS message content."),
+            Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                "<file body in base64 format>",
+            )),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multi_cid
+
+<!-- UsageSnippet language="go" operationID="getMmsPrice" method="post" path="/messages/mms/price" example="multi_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyMmsMessage(
+        components.MmsMessage{
+            Recipients: components.CreateRecipientsArrayOfPhoneNumberWithCid(
+                []components.PhoneNumberWithCid{
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999999999",
+                        Cid: v3.Pointer("custom-id-A44445T"),
+                    },
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999888777",
+                        Cid: v3.Pointer("custom-id-F44445R"),
+                    },
+                },
+            ),
+            Subject: v3.Pointer("This is a subject of the message"),
+            Message: v3.Pointer("This is MMS message content"),
+            Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                "<file body in base64 format>",
+            )),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: single
+
+<!-- UsageSnippet language="go" operationID="getMmsPrice" method="post" path="/messages/mms/price" example="single" -->
 ```go
 package main
 
@@ -44,6 +250,50 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
+            Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                "<file body in base64 format>",
+            )),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: single_cid
+
+<!-- UsageSnippet language="go" operationID="getMmsPrice" method="post" path="/messages/mms/price" example="single_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyMmsMessage(
+        components.MmsMessage{
+            Recipients: components.CreateRecipientsPhoneNumberWithCid(
+                components.PhoneNumberWithCid{
+                    Nr: "+48999999999",
+                    Cid: v3.Pointer("custom-id-A44445T"),
+                },
+            ),
+            Subject: v3.Pointer("This is a subject of the message"),
+            Message: v3.Pointer("This is MMS message content"),
             Attachments: v3.Pointer(components.CreateAttachmentsStr(
                 "<file body in base64 format>",
             )),
@@ -85,9 +335,215 @@ As a successful result a `SendMmsResponse` object will be returned with `Message
 
 `SendMmsResponse` will also include `Headers` property with `X-Success-Count` (a count of messages which were processed successfully), `X-Error-Count` (count of messages which were rejected) and `X-Sandbox` (if a request was made in Sandbox or Production system) elements.
 
-### Example Usage
+### Example Usage: bulk
 
-<!-- UsageSnippet language="go" operationID="sendMms" method="post" path="/messages/mms" -->
+<!-- UsageSnippet language="go" operationID="sendMms" method="post" path="/messages/mms" example="bulk" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyArrayOfMmsMessage(
+        []components.MmsMessage{
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsStr(
+                    "+48999999999",
+                ),
+                Subject: v3.Pointer("This is a subject of the first message"),
+                Message: v3.Pointer("This is first MMS message content"),
+                Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                    "<file 1 body in base64 format>",
+                )),
+            },
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsStr(
+                    "+48999888777",
+                ),
+                Subject: v3.Pointer("This is a subject of the second message"),
+                Message: v3.Pointer("This is second MMS message content"),
+                Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                    "<file 2 body in base64 format>",
+                )),
+            },
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: bulk_cid
+
+<!-- UsageSnippet language="go" operationID="sendMms" method="post" path="/messages/mms" example="bulk_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyArrayOfMmsMessage(
+        []components.MmsMessage{
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsPhoneNumberWithCid(
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999999999",
+                        Cid: v3.Pointer("custom-id-A44445T"),
+                    },
+                ),
+                Subject: v3.Pointer("This is a subject of the first message"),
+                Message: v3.Pointer("This is first MMS message content"),
+                Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                    "<file 1 body in base64 format>",
+                )),
+            },
+            components.MmsMessage{
+                Recipients: components.CreateRecipientsPhoneNumberWithCid(
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999888777",
+                        Cid: v3.Pointer("custom-id-F44445R"),
+                    },
+                ),
+                Subject: v3.Pointer("This is a subject of the second message"),
+                Message: v3.Pointer("This is second MMS message content"),
+                Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                    "<file 2 body in base64 format>",
+                )),
+            },
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multi
+
+<!-- UsageSnippet language="go" operationID="sendMms" method="post" path="/messages/mms" example="multi" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
+        components.MmsMessage{
+            Recipients: components.CreateRecipientsArrayOfStr(
+                []string{
+                    "+48999999999",
+                    "+48999888777",
+                },
+            ),
+            Subject: v3.Pointer("This is a subject of the message"),
+            Message: v3.Pointer("This is MMS message content."),
+            Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                "<file body in base64 format>",
+            )),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multi_cid
+
+<!-- UsageSnippet language="go" operationID="sendMms" method="post" path="/messages/mms" example="multi_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
+        components.MmsMessage{
+            Recipients: components.CreateRecipientsArrayOfPhoneNumberWithCid(
+                []components.PhoneNumberWithCid{
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999999999",
+                        Cid: v3.Pointer("custom-id-A44445T"),
+                    },
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999888777",
+                        Cid: v3.Pointer("custom-id-F44445R"),
+                    },
+                },
+            ),
+            Subject: v3.Pointer("This is a subject of the message"),
+            Message: v3.Pointer("This is MMS message content"),
+            Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                "<file body in base64 format>",
+            )),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: single
+
+<!-- UsageSnippet language="go" operationID="sendMms" method="post" path="/messages/mms" example="single" -->
 ```go
 package main
 
@@ -113,6 +569,50 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
+            Attachments: v3.Pointer(components.CreateAttachmentsStr(
+                "<file body in base64 format>",
+            )),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: single_cid
+
+<!-- UsageSnippet language="go" operationID="sendMms" method="post" path="/messages/mms" example="single_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
+        components.MmsMessage{
+            Recipients: components.CreateRecipientsPhoneNumberWithCid(
+                components.PhoneNumberWithCid{
+                    Nr: "+48999999999",
+                    Cid: v3.Pointer("custom-id-A44445T"),
+                },
+            ),
+            Subject: v3.Pointer("This is a subject of the message"),
+            Message: v3.Pointer("This is MMS message content"),
             Attachments: v3.Pointer(components.CreateAttachmentsStr(
                 "<file body in base64 format>",
             )),

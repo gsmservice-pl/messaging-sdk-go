@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 1.2.3 and generator version 2.779.0
+// Generated from OpenAPI doc version 1.2.3 and generator version 2.918.1
 
 import (
 	"context"
@@ -100,7 +100,7 @@ type Client struct {
 
 type SDKOption func(*Client)
 
-// WithServerURL allows the overriding of the default server URL
+// WithServerURL allows providing an alternative server URL
 func WithServerURL(serverURL string) SDKOption {
 	return func(sdk *Client) {
 		sdk.sdkConfiguration.ServerURL = serverURL
@@ -170,9 +170,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Client {
 	sdk := &Client{
-		SDKVersion: "3.2.2",
+		SDKVersion: "3.2.3",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.2.2 2.779.0 1.2.3 github.com/gsmservice-pl/messaging-sdk-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.2.3 2.918.1 1.2.3 github.com/gsmservice-pl/messaging-sdk-go/v3",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),

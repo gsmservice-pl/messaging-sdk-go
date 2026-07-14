@@ -18,8 +18,8 @@ const (
 
 // GetMmsPriceRequestBody - To check the price of a single message or messages with the same content to multiple recipients, pass a single `MmsMessage` object with the properties of this message using `operations.CreateGetMmsPriceRequestBodyMmsMessage()` method. To check the price of multiple messages with different content at the same time, pass a `[]MmsMessage` array with the properties of each message using `operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage()` method.
 type GetMmsPriceRequestBody struct {
-	MmsMessage        *components.MmsMessage  `queryParam:"inline,name=requestBody" union:"member"`
-	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline,name=requestBody" union:"member"`
+	MmsMessage        *components.MmsMessage  `queryParam:"inline" union:"member"`
+	ArrayOfMmsMessage []components.MmsMessage `queryParam:"inline" union:"member"`
 
 	Type GetMmsPriceRequestBodyType
 }

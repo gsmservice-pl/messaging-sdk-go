@@ -2,6 +2,19 @@
 
 Message type (components.MessageTypeSmsPro -> SMS PRO, components.MessageTypeSmsEco -> SMS ECO, components.MessageTypeSmsTwoWay ->SMS 2WAY, components.MessageTypeMms -> MMS)
 
+## Example Usage
+
+```go
+import (
+	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+)
+
+value := components.MessageTypeSmsPro
+
+// Open enum: custom values can be created with a direct type cast
+custom := components.MessageType(999)
+```
+
 
 ## Values
 

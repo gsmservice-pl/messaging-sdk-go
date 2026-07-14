@@ -29,3 +29,19 @@ smsMessageRecipients := components.CreateSmsMessageRecipientsPhoneNumberWithCid(
 smsMessageRecipients := components.CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid([]components.PhoneNumberWithCid{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch smsMessageRecipients.Type {
+	case components.SmsMessageRecipientsTypeStr:
+		// smsMessageRecipients.Str is populated
+	case components.SmsMessageRecipientsTypeArrayOfStr:
+		// smsMessageRecipients.ArrayOfStr is populated
+	case components.SmsMessageRecipientsTypePhoneNumberWithCid:
+		// smsMessageRecipients.PhoneNumberWithCid is populated
+	case components.SmsMessageRecipientsTypeArrayOfPhoneNumberWithCid:
+		// smsMessageRecipients.ArrayOfPhoneNumberWithCid is populated
+}
+```

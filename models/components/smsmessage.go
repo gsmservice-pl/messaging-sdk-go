@@ -20,10 +20,10 @@ const (
 
 // SmsMessageRecipients - The recipient number or multiple recipients numbers of single message. To set one recipient, please use `components.CreateSmsMessageRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateSmsMessageRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateSmsMessageRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid()` method passing []PhoneNumberWithCid (in case of multiple recipients).
 type SmsMessageRecipients struct {
-	Str                       *string              `queryParam:"inline,name=recipients" union:"member"`
-	ArrayOfStr                []string             `queryParam:"inline,name=recipients" union:"member"`
-	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline,name=recipients" union:"member"`
-	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline,name=recipients" union:"member"`
+	Str                       *string              `queryParam:"inline" union:"member"`
+	ArrayOfStr                []string             `queryParam:"inline" union:"member"`
+	PhoneNumberWithCid        *PhoneNumberWithCid  `queryParam:"inline" union:"member"`
+	ArrayOfPhoneNumberWithCid []PhoneNumberWithCid `queryParam:"inline" union:"member"`
 
 	Type SmsMessageRecipientsType
 }
