@@ -64,7 +64,14 @@ func CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid(arrayOfPhoneNumberWithC
 	}
 }
 
-func (u *SmsMessageRecipients) UnmarshalJSON(data []byte) error {
+func (u *SmsMessageRecipients) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = SmsMessageRecipients{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var phoneNumberWithCid PhoneNumberWithCid = PhoneNumberWithCid{}
 	if err := utils.UnmarshalJSON(data, &phoneNumberWithCid, "", true, nil); err == nil {

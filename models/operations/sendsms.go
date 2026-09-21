@@ -42,7 +42,14 @@ func CreateSendSmsRequestBodyArrayOfSmsMessage(arrayOfSmsMessage []components.Sm
 	}
 }
 
-func (u *SendSmsRequestBody) UnmarshalJSON(data []byte) error {
+func (u *SendSmsRequestBody) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = SendSmsRequestBody{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var smsMessage components.SmsMessage = components.SmsMessage{}
 	if err := utils.UnmarshalJSON(data, &smsMessage, "", true, nil); err == nil {

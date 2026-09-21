@@ -64,7 +64,14 @@ func CreateRecipientsArrayOfPhoneNumberWithCid(arrayOfPhoneNumberWithCid []Phone
 	}
 }
 
-func (u *Recipients) UnmarshalJSON(data []byte) error {
+func (u *Recipients) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Recipients{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var phoneNumberWithCid PhoneNumberWithCid = PhoneNumberWithCid{}
 	if err := utils.UnmarshalJSON(data, &phoneNumberWithCid, "", true, nil); err == nil {
@@ -150,7 +157,14 @@ func CreateAttachmentsArrayOfStr(arrayOfStr []string) Attachments {
 	}
 }
 
-func (u *Attachments) UnmarshalJSON(data []byte) error {
+func (u *Attachments) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Attachments{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {

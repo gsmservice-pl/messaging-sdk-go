@@ -42,7 +42,14 @@ func CreateGetMmsPriceRequestBodyArrayOfMmsMessage(arrayOfMmsMessage []component
 	}
 }
 
-func (u *GetMmsPriceRequestBody) UnmarshalJSON(data []byte) error {
+func (u *GetMmsPriceRequestBody) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = GetMmsPriceRequestBody{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var mmsMessage components.MmsMessage = components.MmsMessage{}
 	if err := utils.UnmarshalJSON(data, &mmsMessage, "", true, nil); err == nil {
