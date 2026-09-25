@@ -20,11 +20,11 @@ The speakeasy CLI allows you to generate more usage snippets. Here's how:
 - To generate a sample for a specific operation by providing an operation ID, use:
 
 ```
-speakeasy generate usage -s ..\..\app\libs\restApi\openapi.yaml  -l go -i {INPUT_OPERATION_ID} -o ./samples
+speakeasy generate usage -s ..\..\app\libs\infrastructure\Api\Rest\openapi.yaml  -l go -i {INPUT_OPERATION_ID} -o ./samples
 ```
 
 - To generate samples for an entire namespace (like a tag or group name), use:
 
 ```
-speakeasy generate usage -s ..\..\app\libs\restApi\openapi.yaml  -l go -n {INPUT_TAG_NAME} -o ./samples
+speakeasy generate usage -s ..\..\app\libs\infrastructure\Api\Rest\openapi.yaml  -l go -n {INPUT_TAG_NAME} -o ./samples
 ```

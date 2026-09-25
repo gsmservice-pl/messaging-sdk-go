@@ -234,7 +234,7 @@ func (s *Accounts) Get(ctx context.Context, opts ...operations.Option) (*operati
 
 			var out sdkerrors.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, sdkerrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -255,7 +255,7 @@ func (s *Accounts) Get(ctx context.Context, opts ...operations.Option) (*operati
 
 			var out sdkerrors.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, sdkerrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -489,7 +489,7 @@ func (s *Accounts) GetSubaccount(ctx context.Context, userLogin string, opts ...
 
 			var out sdkerrors.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, sdkerrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -510,7 +510,7 @@ func (s *Accounts) GetSubaccount(ctx context.Context, userLogin string, opts ...
 
 			var out sdkerrors.ErrorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, sdkerrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out

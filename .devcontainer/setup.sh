@@ -12,4 +12,4 @@ go mod download
 go mod tidy
 
 # Generate starter usage sample with speakeasy
-speakeasy generate usage -s ..\..\app\libs\restApi\openapi.yaml  -l go -o samples/root.go
+speakeasy generate usage -s ..\..\app\libs\infrastructure\Api\Rest\openapi.yaml  -l go -o samples/root.go
