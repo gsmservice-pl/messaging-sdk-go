@@ -1,5 +1,5 @@
 
-module github.com/gsmservice-pl/messaging-sdk-go/v3
+module github.com/gsmservice-pl/messaging-sdk-go/v4
 
 go 1.26.8
 

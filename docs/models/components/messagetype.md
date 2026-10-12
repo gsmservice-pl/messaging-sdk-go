@@ -6,7 +6,7 @@ Message type (components.MessageTypeSmsPro -> SMS PRO, components.MessageTypeSms
 
 ```go
 import (
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
 )
 
 value := components.MessageTypeSmsPro

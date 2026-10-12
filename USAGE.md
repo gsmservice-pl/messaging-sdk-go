@@ -8,17 +8,17 @@ package main
 
 import (
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v4.New(
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
@@ -27,7 +27,7 @@ func main() {
 				"+48999999999",
 			),
 			Message: "This is SMS message content.",
-			Unicode: v3.Pointer(true),
+			Unicode: v4.Pointer(true),
 		},
 	))
 	if err != nil {
@@ -49,17 +49,17 @@ package main
 
 import (
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v4.New(
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
@@ -67,9 +67,9 @@ func main() {
 			Recipients: components.CreateRecipientsStr(
 				"+48999999999",
 			),
-			Subject: v3.Pointer("This is a subject of the message"),
-			Message: v3.Pointer("This is MMS message content."),
-			Attachments: v3.Pointer(components.CreateAttachmentsStr(
+			Subject: v4.Pointer("This is a subject of the message"),
+			Message: v4.Pointer("This is MMS message content."),
+			Attachments: v4.Pointer(components.CreateAttachmentsStr(
 				"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
 			)),
 		},

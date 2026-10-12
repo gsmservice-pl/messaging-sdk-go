@@ -22,15 +22,15 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.GetByIds(ctx, []int64{
@@ -81,15 +81,15 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.CancelScheduled(ctx, []int64{
@@ -138,18 +138,18 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    res, err := s.Outgoing.List(ctx, v3.Pointer[int64](1), v3.Pointer[int64](10))
+    res, err := s.Outgoing.List(ctx, v4.Pointer[int64](1), v4.Pointer[int64](10))
     if err != nil {
         log.Fatal(err)
     }

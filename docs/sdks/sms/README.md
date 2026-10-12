@@ -24,17 +24,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodyArrayOfSmsMessage(
@@ -44,14 +44,14 @@ func main() {
                     "+48999999999",
                 ),
                 Message: "This is first SMS message content",
-                Unicode: v3.Pointer(true),
+                Unicode: v4.Pointer(true),
             },
             components.SmsMessage{
                 Recipients: components.CreateSmsMessageRecipientsStr(
                     "+48999888777",
                 ),
                 Message: "This is second SMS message content",
-                Unicode: v3.Pointer(true),
+                Unicode: v4.Pointer(true),
             },
         },
     ))
@@ -71,17 +71,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodyArrayOfSmsMessage(
@@ -90,21 +90,21 @@ func main() {
                 Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
                     components.PhoneNumberWithCid{
                         Nr: "+48999999999",
-                        Cid: v3.Pointer("custom-id-A44445T"),
+                        Cid: v4.Pointer("custom-id-A44445T"),
                     },
                 ),
                 Message: "This is first SMS message content",
-                Unicode: v3.Pointer(true),
+                Unicode: v4.Pointer(true),
             },
             components.SmsMessage{
                 Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
                     components.PhoneNumberWithCid{
                         Nr: "+48999888777",
-                        Cid: v3.Pointer("custom-id-F44445R"),
+                        Cid: v4.Pointer("custom-id-F44445R"),
                     },
                 ),
                 Message: "This is second SMS message content",
-                Unicode: v3.Pointer(true),
+                Unicode: v4.Pointer(true),
             },
         },
     ))
@@ -124,17 +124,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodySmsMessage(
@@ -146,7 +146,7 @@ func main() {
                 },
             ),
             Message: "This is SMS message content.",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {
@@ -165,17 +165,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodySmsMessage(
@@ -184,16 +184,16 @@ func main() {
                 []components.PhoneNumberWithCid{
                     components.PhoneNumberWithCid{
                         Nr: "+48999999999",
-                        Cid: v3.Pointer("custom-id-A44445T"),
+                        Cid: v4.Pointer("custom-id-A44445T"),
                     },
                     components.PhoneNumberWithCid{
                         Nr: "+48999888777",
-                        Cid: v3.Pointer("custom-id-F44445R"),
+                        Cid: v4.Pointer("custom-id-F44445R"),
                     },
                 },
             ),
             Message: "This is SMS message content",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {
@@ -212,17 +212,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodySmsMessage(
@@ -231,7 +231,7 @@ func main() {
                 "+48999999999",
             ),
             Message: "This is SMS message content.",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {
@@ -250,17 +250,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodySmsMessage(
@@ -268,11 +268,11 @@ func main() {
             Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
                 components.PhoneNumberWithCid{
                     Nr: "+48999999999",
-                    Cid: v3.Pointer("custom-id-A44445T"),
+                    Cid: v4.Pointer("custom-id-A44445T"),
                 },
             ),
             Message: "This is SMS message content",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {
@@ -320,17 +320,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
@@ -340,14 +340,14 @@ func main() {
                     "+48999999999",
                 ),
                 Message: "This is first SMS message content",
-                Unicode: v3.Pointer(true),
+                Unicode: v4.Pointer(true),
             },
             components.SmsMessage{
                 Recipients: components.CreateSmsMessageRecipientsStr(
                     "+48999888777",
                 ),
                 Message: "This is second SMS message content",
-                Unicode: v3.Pointer(true),
+                Unicode: v4.Pointer(true),
             },
         },
     ))
@@ -367,17 +367,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
@@ -386,21 +386,21 @@ func main() {
                 Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
                     components.PhoneNumberWithCid{
                         Nr: "+48999999999",
-                        Cid: v3.Pointer("custom-id-A44445T"),
+                        Cid: v4.Pointer("custom-id-A44445T"),
                     },
                 ),
                 Message: "This is first SMS message content",
-                Unicode: v3.Pointer(true),
+                Unicode: v4.Pointer(true),
             },
             components.SmsMessage{
                 Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
                     components.PhoneNumberWithCid{
                         Nr: "+48999888777",
-                        Cid: v3.Pointer("custom-id-F44445R"),
+                        Cid: v4.Pointer("custom-id-F44445R"),
                     },
                 ),
                 Message: "This is second SMS message content",
-                Unicode: v3.Pointer(true),
+                Unicode: v4.Pointer(true),
             },
         },
     ))
@@ -420,17 +420,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
@@ -442,7 +442,7 @@ func main() {
                 },
             ),
             Message: "This is SMS message content.",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {
@@ -461,17 +461,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
@@ -480,16 +480,16 @@ func main() {
                 []components.PhoneNumberWithCid{
                     components.PhoneNumberWithCid{
                         Nr: "+48999999999",
-                        Cid: v3.Pointer("custom-id-A44445T"),
+                        Cid: v4.Pointer("custom-id-A44445T"),
                     },
                     components.PhoneNumberWithCid{
                         Nr: "+48999888777",
-                        Cid: v3.Pointer("custom-id-F44445R"),
+                        Cid: v4.Pointer("custom-id-F44445R"),
                     },
                 },
             ),
             Message: "This is SMS message content",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {
@@ -508,17 +508,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
@@ -527,7 +527,7 @@ func main() {
                 "+48999999999",
             ),
             Message: "This is SMS message content.",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {
@@ -546,17 +546,17 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
@@ -564,11 +564,11 @@ func main() {
             Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
                 components.PhoneNumberWithCid{
                     Nr: "+48999999999",
-                    Cid: v3.Pointer("custom-id-A44445T"),
+                    Cid: v4.Pointer("custom-id-A44445T"),
                 },
             ),
             Message: "This is SMS message content",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {

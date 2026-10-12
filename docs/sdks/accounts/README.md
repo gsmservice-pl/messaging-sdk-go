@@ -21,15 +21,15 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Accounts.Get(ctx)
@@ -77,15 +77,15 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Accounts.GetSubaccount(ctx, "some-login")
