@@ -40,20 +40,20 @@ func main() {
     res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage(
         []components.MmsMessage{
             components.MmsMessage{
-                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
                 Recipients: components.CreateRecipientsStr(
                     "+48999999999",
                 ),
                 Subject: v3.Pointer("This is a subject of the first message"),
                 Message: v3.Pointer("This is first MMS message content"),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             components.MmsMessage{
-                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
                 Recipients: components.CreateRecipientsStr(
                     "+48999888777",
                 ),
                 Subject: v3.Pointer("This is a subject of the second message"),
                 Message: v3.Pointer("This is second MMS message content"),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
         },
     ))
@@ -89,7 +89,6 @@ func main() {
     res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage(
         []components.MmsMessage{
             components.MmsMessage{
-                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
                 Recipients: components.CreateRecipientsPhoneNumberWithCid(
                     components.PhoneNumberWithCid{
                         Nr: "+48999999999",
@@ -98,9 +97,9 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the first message"),
                 Message: v3.Pointer("This is first MMS message content"),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             components.MmsMessage{
-                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
                 Recipients: components.CreateRecipientsPhoneNumberWithCid(
                     components.PhoneNumberWithCid{
                         Nr: "+48999888777",
@@ -109,6 +108,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the second message"),
                 Message: v3.Pointer("This is second MMS message content"),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
         },
     ))
@@ -143,7 +143,6 @@ func main() {
 
     res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyMmsMessage(
         components.MmsMessage{
-            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             Recipients: components.CreateRecipientsArrayOfStr(
                 []string{
                     "+48999999999",
@@ -152,6 +151,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -185,7 +185,6 @@ func main() {
 
     res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyMmsMessage(
         components.MmsMessage{
-            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             Recipients: components.CreateRecipientsArrayOfPhoneNumberWithCid(
                 []components.PhoneNumberWithCid{
                     components.PhoneNumberWithCid{
@@ -200,6 +199,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content"),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -233,12 +233,12 @@ func main() {
 
     res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyMmsMessage(
         components.MmsMessage{
-            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             Recipients: components.CreateRecipientsStr(
                 "+48999999999",
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -272,7 +272,6 @@ func main() {
 
     res, err := s.Outgoing.Mms.GetPrice(ctx, operations.CreateGetMmsPriceRequestBodyMmsMessage(
         components.MmsMessage{
-            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             Recipients: components.CreateRecipientsPhoneNumberWithCid(
                 components.PhoneNumberWithCid{
                     Nr: "+48999999999",
@@ -281,6 +280,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content"),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -344,20 +344,20 @@ func main() {
     res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyArrayOfMmsMessage(
         []components.MmsMessage{
             components.MmsMessage{
-                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
                 Recipients: components.CreateRecipientsStr(
                     "+48999999999",
                 ),
                 Subject: v3.Pointer("This is a subject of the first message"),
                 Message: v3.Pointer("This is first MMS message content"),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             components.MmsMessage{
-                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
                 Recipients: components.CreateRecipientsStr(
                     "+48999888777",
                 ),
                 Subject: v3.Pointer("This is a subject of the second message"),
                 Message: v3.Pointer("This is second MMS message content"),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
         },
     ))
@@ -393,7 +393,6 @@ func main() {
     res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyArrayOfMmsMessage(
         []components.MmsMessage{
             components.MmsMessage{
-                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
                 Recipients: components.CreateRecipientsPhoneNumberWithCid(
                     components.PhoneNumberWithCid{
                         Nr: "+48999999999",
@@ -402,9 +401,9 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the first message"),
                 Message: v3.Pointer("This is first MMS message content"),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             components.MmsMessage{
-                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
                 Recipients: components.CreateRecipientsPhoneNumberWithCid(
                     components.PhoneNumberWithCid{
                         Nr: "+48999888777",
@@ -413,6 +412,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the second message"),
                 Message: v3.Pointer("This is second MMS message content"),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
         },
     ))
@@ -447,7 +447,6 @@ func main() {
 
     res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
         components.MmsMessage{
-            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             Recipients: components.CreateRecipientsArrayOfStr(
                 []string{
                     "+48999999999",
@@ -456,6 +455,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -489,7 +489,6 @@ func main() {
 
     res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
         components.MmsMessage{
-            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             Recipients: components.CreateRecipientsArrayOfPhoneNumberWithCid(
                 []components.PhoneNumberWithCid{
                     components.PhoneNumberWithCid{
@@ -504,6 +503,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content"),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -537,12 +537,12 @@ func main() {
 
     res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
         components.MmsMessage{
-            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             Recipients: components.CreateRecipientsStr(
                 "+48999999999",
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -576,7 +576,6 @@ func main() {
 
     res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
         components.MmsMessage{
-            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             Recipients: components.CreateRecipientsPhoneNumberWithCid(
                 components.PhoneNumberWithCid{
                     Nr: "+48999999999",
@@ -585,6 +584,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content"),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
