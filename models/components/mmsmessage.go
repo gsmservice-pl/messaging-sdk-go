@@ -126,14 +126,14 @@ func (u Recipients) MarshalJSON() ([]byte, error) {
 
 // MmsMessage - An object with a new MMS message properties
 type MmsMessage struct {
+	// Attachments for the message. You can pass here images, audio and video files bodies. To set one attachment please use `components.CreateAttachmentsStr()` method simply passing to it a `string` with attachment body encoded with `base64`. To set multiple attachments - please use `components.CreateAttachmentsArrayOfStr()` method passing to it `[]string` with attachment bodies encoded by `base64`. Max 3 attachments per message.
+	Attachments any `json:"attachments,omitempty"`
 	// The recipient number or multiple recipients numbers of single message. To set one recipient, simply use `components.CreateRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateRecipientsArrayOfPhoneNumberWithCid()` method passing `[]PhoneNumberWithCid` (in case of multiple recipients).
 	Recipients Recipients `json:"recipients"`
 	// MMS message subject. Missing or null is treated as an empty subject.
 	Subject *string `json:"subject,omitempty"`
 	// MMS message content. Missing or null is treated as empty text; a message may contain attachments.
 	Message *string `json:"message,omitempty"`
-	// Attachments for the message. You can pass here images, audio and video files bodies. To set one attachment please pass a `string` with attachment body encoded by `base64`. To set multiple attachments - pass an `array` of `strings` with attachment bodies encoded by `base64`. Max 3 attachments per message. Omit the property or pass null for no attachments.
-	Attachments any `json:"attachments,omitempty"`
 	// Scheduled future date and time of sending the message (in ISO 8601 format). If missing or null - message will be sent immediately
 	Date *time.Time `default:"null" json:"date"`
 }
@@ -147,6 +147,13 @@ func (m *MmsMessage) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (m *MmsMessage) GetAttachments() any {
+	if m == nil {
+		return nil
+	}
+	return m.Attachments
 }
 
 func (m *MmsMessage) GetRecipients() Recipients {
@@ -168,13 +175,6 @@ func (m *MmsMessage) GetMessage() *string {
 		return nil
 	}
 	return m.Message
-}
-
-func (m *MmsMessage) GetAttachments() any {
-	if m == nil {
-		return nil
-	}
-	return m.Attachments
 }
 
 func (m *MmsMessage) GetDate() *time.Time {

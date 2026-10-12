@@ -64,12 +64,12 @@ func main() {
 
 	res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
 		components.MmsMessage{
+			Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
 			Recipients: components.CreateRecipientsStr(
 				"+48999999999",
 			),
-			Subject:     v3.Pointer("This is a subject of the message"),
-			Message:     v3.Pointer("This is MMS message content."),
-			Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+			Subject: v3.Pointer("This is a subject of the message"),
+			Message: v3.Pointer("This is MMS message content."),
 		},
 	))
 	if err != nil {
