@@ -2,6 +2,16 @@
 
 Account type
 
+## Example Usage
+
+```go
+import (
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+)
+
+value := components.AccountTypePrePaid
+```
+
 
 ## Values
 

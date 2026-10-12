@@ -24,18 +24,18 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
-    res, err := s.Incoming.List(ctx, v3.Pointer[int64](1), v3.Pointer[int64](10))
+    res, err := s.Incoming.List(ctx, v4.Pointer[int64](1), v4.Pointer[int64](10))
     if err != nil {
         log.Fatal(err)
     }
@@ -50,8 +50,8 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `page`                                                   | **int64*                                                 | :heavy_minus_sign:                                       | Page number of results                                   | 1                                                        |
-| `limit`                                                  | **int64*                                                 | :heavy_minus_sign:                                       | Number of results on one page                            | 10                                                       |
+| `page`                                                   | `*int64`                                                 | :heavy_minus_sign:                                       | Page number of results                                   | 1                                                        |
+| `limit`                                                  | `*int64`                                                 | :heavy_minus_sign:                                       | Number of results on one page                            | 10                                                       |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -62,7 +62,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 404, 4XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 403, 404, 4XX       | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## GetByIds
@@ -81,15 +82,15 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Incoming.GetByIds(ctx, []int64{
@@ -109,7 +110,7 @@ func main() {
 | Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
-| `ids`                                                                                                        | []*int64*                                                                                                    | :heavy_check_mark:                                                                                           | Array of Message IDs assigned by the system. The system will accept a maximum of 50 identifiers in one call. |
+| `ids`                                                                                                        | []`int64`                                                                                                    | :heavy_check_mark:                                                                                           | Array of Message IDs assigned by the system. The system will accept a maximum of 50 identifiers in one call. |
 | `opts`                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
 ### Response
@@ -120,7 +121,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 404, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 404, 4XX            | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## RemoveByIds
@@ -133,7 +135,7 @@ Response will also include meta-data headers: `X-Success-Count` (a count of inco
  
 If you pass duplicated incoming message IDs in one call, API will process them only once. This request have to be authenticated using **API Access Token**.
 
-In case of an error, the `ErrorResponse` object will be returned with proper HTTP header status code (our error response complies with [RFC 9457](https://www.rfc-editor.org/rfc/rfc7807)).
+In case of an error, the `ErrorResponse` object will be returned with proper HTTP header status code (our error response complies with [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457)).
 
 ### Example Usage
 
@@ -143,15 +145,15 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Incoming.RemoveByIds(ctx, []int64{
@@ -171,7 +173,7 @@ func main() {
 | Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
-| `ids`                                                                                                        | []*int64*                                                                                                    | :heavy_check_mark:                                                                                           | Array of Message IDs assigned by the system. The system will accept a maximum of 50 identifiers in one call. |
+| `ids`                                                                                                        | []`int64`                                                                                                    | :heavy_check_mark:                                                                                           | Array of Message IDs assigned by the system. The system will accept a maximum of 50 identifiers in one call. |
 | `opts`                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
 
 ### Response
@@ -182,5 +184,6 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 404, 4XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 403, 404, 4XX       | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |

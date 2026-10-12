@@ -29,3 +29,19 @@ recipients := components.CreateRecipientsPhoneNumberWithCid(components.PhoneNumb
 recipients := components.CreateRecipientsArrayOfPhoneNumberWithCid([]components.PhoneNumberWithCid{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch recipients.Type {
+	case components.RecipientsTypeStr:
+		// recipients.Str is populated
+	case components.RecipientsTypeArrayOfStr:
+		// recipients.ArrayOfStr is populated
+	case components.RecipientsTypePhoneNumberWithCid:
+		// recipients.PhoneNumberWithCid is populated
+	case components.RecipientsTypeArrayOfPhoneNumberWithCid:
+		// recipients.ArrayOfPhoneNumberWithCid is populated
+}
+```

@@ -17,3 +17,15 @@ getMmsPriceRequestBody := operations.CreateGetMmsPriceRequestBodyMmsMessage(comp
 getMmsPriceRequestBody := operations.CreateGetMmsPriceRequestBodyArrayOfMmsMessage([]components.MmsMessage{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch getMmsPriceRequestBody.Type {
+	case operations.GetMmsPriceRequestBodyTypeMmsMessage:
+		// getMmsPriceRequestBody.MmsMessage is populated
+	case operations.GetMmsPriceRequestBodyTypeArrayOfMmsMessage:
+		// getMmsPriceRequestBody.ArrayOfMmsMessage is populated
+}
+```

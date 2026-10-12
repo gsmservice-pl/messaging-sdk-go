@@ -17,3 +17,15 @@ sendSmsRequestBody := operations.CreateSendSmsRequestBodySmsMessage(components.S
 sendSmsRequestBody := operations.CreateSendSmsRequestBodyArrayOfSmsMessage([]components.SmsMessage{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch sendSmsRequestBody.Type {
+	case operations.SendSmsRequestBodyTypeSmsMessage:
+		// sendSmsRequestBody.SmsMessage is populated
+	case operations.SendSmsRequestBodyTypeArrayOfSmsMessage:
+		// sendSmsRequestBody.ArrayOfSmsMessage is populated
+}
+```

@@ -38,7 +38,7 @@ Also you can refer to the [REST API documentation](https://api.szybkisms.pl/rest
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/gsmservice-pl/messaging-sdk-go/v3
+go get github.com/gsmservice-pl/messaging-sdk-go/v4
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -54,17 +54,17 @@ package main
 
 import (
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v4.New(
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
@@ -73,7 +73,7 @@ func main() {
 				"+48999999999",
 			),
 			Message: "This is SMS message content.",
-			Unicode: v3.Pointer(true),
+			Unicode: v4.Pointer(true),
 		},
 	))
 	if err != nil {
@@ -95,17 +95,17 @@ package main
 
 import (
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v4.New(
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Outgoing.Mms.Send(ctx, operations.CreateSendMmsRequestBodyMmsMessage(
@@ -113,10 +113,10 @@ func main() {
 			Recipients: components.CreateRecipientsStr(
 				"+48999999999",
 			),
-			Subject: v3.Pointer("This is a subject of the message"),
-			Message: v3.Pointer("This is MMS message content."),
-			Attachments: v3.Pointer(components.CreateAttachmentsStr(
-				"<file body in base64 format>",
+			Subject: v4.Pointer("This is a subject of the message"),
+			Message: v4.Pointer("This is MMS message content."),
+			Attachments: v4.Pointer(components.CreateAttachmentsStr(
+				"R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
 			)),
 		},
 	))
@@ -189,8 +189,8 @@ package main
 
 import (
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/retry"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/retry"
 	"log"
 	"models/operations"
 )
@@ -198,8 +198,8 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v4.New(
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx, operations.WithRetries(
@@ -229,16 +229,16 @@ package main
 
 import (
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/retry"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/retry"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithRetryConfig(
+	s := v4.New(
+		v4.WithRetryConfig(
 			retry.Config{
 				Strategy: "backoff",
 				Backoff: &retry.BackoffStrategy{
@@ -249,7 +249,7 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)
@@ -273,10 +273,11 @@ By Default, an API error will return `sdkerrors.SDKError`. When custom error res
 
 For example, the `Get` function may return the following errors:
 
-| Error Type              | Status Code   | Content Type             |
-| ----------------------- | ------------- | ------------------------ |
-| sdkerrors.ErrorResponse | 401, 403, 4XX | application/problem+json |
-| sdkerrors.ErrorResponse | 5XX           | application/problem+json |
+| Error Type              | Status Code | Content Type             |
+| ----------------------- | ----------- | ------------------------ |
+| sdkerrors.ErrorResponse | 401, 405    | application/problem+json |
+| sdkerrors.ErrorResponse | 403, 4XX    | application/problem+json |
+| sdkerrors.ErrorResponse | 5XX         | application/problem+json |
 
 ### Example
 
@@ -286,20 +287,26 @@ package main
 import (
 	"context"
 	"errors"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/sdkerrors"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/sdkerrors"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v4.New(
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)
 	if err != nil {
+
+		var e *sdkerrors.ErrorResponse
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 
 		var e *sdkerrors.ErrorResponse
 		if errors.As(err, &e) {
@@ -343,16 +350,16 @@ package main
 
 import (
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithServer("prod"),
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v4.New(
+		v4.WithServer("prod"),
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)
@@ -374,16 +381,16 @@ package main
 
 import (
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithServerURL("https://api.szybkisms.pl/rest"),
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v4.New(
+		v4.WithServerURL("https://api.szybkisms.pl/rest"),
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)
@@ -416,12 +423,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = v3.New(v3.WithClient(httpClient))
+	sdkClient  = v4.New(v4.WithClient(httpClient))
 )
 ```
 
@@ -445,15 +452,15 @@ package main
 
 import (
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := v3.New(
-		v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+	s := v4.New(
+		v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
 	)
 
 	res, err := s.Accounts.Get(ctx)

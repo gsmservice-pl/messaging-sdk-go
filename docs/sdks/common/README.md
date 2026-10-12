@@ -20,14 +20,14 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New()
+    s := v4.New()
 
     res, err := s.Common.Ping(ctx)
     if err != nil {
@@ -54,5 +54,6 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
+| sdkerrors.ErrorResponse  | 405                      | application/problem+json |
 | sdkerrors.ErrorResponse  | 400, 4XX                 | application/problem+json |
 | sdkerrors.ErrorResponse  | 503, 5XX                 | application/problem+json |

@@ -23,15 +23,15 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Senders.List(ctx)
@@ -59,7 +59,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 403, 4XX            | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## Add
@@ -76,16 +77,16 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Senders.Add(ctx, components.SenderInput{
@@ -117,7 +118,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 403, 415, 422, 4XX  | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## Delete
@@ -134,15 +136,15 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Senders.Delete(ctx, "Podpis")
@@ -160,7 +162,7 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `sender`                                                 | *string*                                                 | :heavy_check_mark:                                       | Sender name to be removed                                | Podpis                                                   |
+| `sender`                                                 | `string`                                                 | :heavy_check_mark:                                       | Sender name to be removed                                | Podpis                                                   |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -171,7 +173,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 404, 4XX  | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 403, 404, 4XX            | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## SetDefault
@@ -188,15 +191,15 @@ package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Senders.SetDefault(ctx, "Podpis")
@@ -214,7 +217,7 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `sender`                                                 | *string*                                                 | :heavy_check_mark:                                       | Sender name to set as default                            | Podpis                                                   |
+| `sender`                                                 | `string`                                                 | :heavy_check_mark:                                       | Sender name to set as default                            | Podpis                                                   |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -225,6 +228,6 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 404                      | application/json         |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 403, 404, 409, 4XX  | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |

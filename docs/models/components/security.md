@@ -5,4 +5,4 @@
 
 | Field                   | Type                    | Required                | Description             | Example                 |
 | ----------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- |
-| `Bearer`                | **string*               | :heavy_minus_sign:      | N/A                     | <YOUR API ACCESS TOKEN> |
+| `Bearer`                | `*string`               | :heavy_minus_sign:      | N/A                     | <YOUR API ACCESS TOKEN> |

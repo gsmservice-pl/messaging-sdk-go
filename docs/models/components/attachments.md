@@ -17,3 +17,15 @@ attachments := components.CreateAttachmentsStr(string{/* values here */})
 attachments := components.CreateAttachmentsArrayOfStr([]string{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch attachments.Type {
+	case components.AttachmentsTypeStr:
+		// attachments.Str is populated
+	case components.AttachmentsTypeArrayOfStr:
+		// attachments.ArrayOfStr is populated
+}
+```

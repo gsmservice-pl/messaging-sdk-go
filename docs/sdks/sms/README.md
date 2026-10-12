@@ -16,25 +16,213 @@ As a successful result a `GetSmsPriceResponse` object will be returned with `Pri
 
 `GetSmsPriceResponse` object will include also `Headers` property with `X-Success-Count` (a count of messages which were processed successfully) and `X-Error-Count` (count of messages which were rejected) elements.
 
-### Example Usage
+### Example Usage: bulk
 
-<!-- UsageSnippet language="go" operationID="getSmsPrice" method="post" path="/messages/sms/price" -->
+<!-- UsageSnippet language="go" operationID="getSmsPrice" method="post" path="/messages/sms/price" example="bulk" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodyArrayOfSmsMessage(
+        []components.SmsMessage{
+            components.SmsMessage{
+                Recipients: components.CreateSmsMessageRecipientsStr(
+                    "+48999999999",
+                ),
+                Message: "This is first SMS message content",
+                Unicode: v4.Pointer(true),
+            },
+            components.SmsMessage{
+                Recipients: components.CreateSmsMessageRecipientsStr(
+                    "+48999888777",
+                ),
+                Message: "This is second SMS message content",
+                Unicode: v4.Pointer(true),
+            },
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: bulk_cid
+
+<!-- UsageSnippet language="go" operationID="getSmsPrice" method="post" path="/messages/sms/price" example="bulk_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodyArrayOfSmsMessage(
+        []components.SmsMessage{
+            components.SmsMessage{
+                Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999999999",
+                        Cid: v4.Pointer("custom-id-A44445T"),
+                    },
+                ),
+                Message: "This is first SMS message content",
+                Unicode: v4.Pointer(true),
+            },
+            components.SmsMessage{
+                Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999888777",
+                        Cid: v4.Pointer("custom-id-F44445R"),
+                    },
+                ),
+                Message: "This is second SMS message content",
+                Unicode: v4.Pointer(true),
+            },
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multi
+
+<!-- UsageSnippet language="go" operationID="getSmsPrice" method="post" path="/messages/sms/price" example="multi" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodySmsMessage(
+        components.SmsMessage{
+            Recipients: components.CreateSmsMessageRecipientsArrayOfStr(
+                []string{
+                    "+48999999999",
+                    "+48999888777",
+                },
+            ),
+            Message: "This is SMS message content.",
+            Unicode: v4.Pointer(true),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multi_cid
+
+<!-- UsageSnippet language="go" operationID="getSmsPrice" method="post" path="/messages/sms/price" example="multi_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodySmsMessage(
+        components.SmsMessage{
+            Recipients: components.CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid(
+                []components.PhoneNumberWithCid{
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999999999",
+                        Cid: v4.Pointer("custom-id-A44445T"),
+                    },
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999888777",
+                        Cid: v4.Pointer("custom-id-F44445R"),
+                    },
+                },
+            ),
+            Message: "This is SMS message content",
+            Unicode: v4.Pointer(true),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: single
+
+<!-- UsageSnippet language="go" operationID="getSmsPrice" method="post" path="/messages/sms/price" example="single" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodySmsMessage(
@@ -43,7 +231,48 @@ func main() {
                 "+48999999999",
             ),
             Message: "This is SMS message content.",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Prices != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: single_cid
+
+<!-- UsageSnippet language="go" operationID="getSmsPrice" method="post" path="/messages/sms/price" example="single_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.GetPrice(ctx, operations.CreateGetSmsPriceRequestBodySmsMessage(
+        components.SmsMessage{
+            Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
+                components.PhoneNumberWithCid{
+                    Nr: "+48999999999",
+                    Cid: v4.Pointer("custom-id-A44445T"),
+                },
+            ),
+            Message: "This is SMS message content",
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {
@@ -71,7 +300,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 4XX            | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 415, 4XX            | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## Send
@@ -82,25 +312,213 @@ As a successful result a `SendSmsResponse` object will be returned with `Message
 
 `SendSmsResponse` will also include `Headers` property with `X-Success-Count` (a count of messages which were processed successfully), `X-Error-Count` (count of messages which were rejected) and `X-Sandbox` (if a request was made in Sandbox or Production system) elements.
 
-### Example Usage
+### Example Usage: bulk
 
-<!-- UsageSnippet language="go" operationID="sendSms" method="post" path="/messages/sms" -->
+<!-- UsageSnippet language="go" operationID="sendSms" method="post" path="/messages/sms" example="bulk" -->
 ```go
 package main
 
 import(
 	"context"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/components"
-	"github.com/gsmservice-pl/messaging-sdk-go/v3/models/operations"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := v3.New(
-        v3.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
+        []components.SmsMessage{
+            components.SmsMessage{
+                Recipients: components.CreateSmsMessageRecipientsStr(
+                    "+48999999999",
+                ),
+                Message: "This is first SMS message content",
+                Unicode: v4.Pointer(true),
+            },
+            components.SmsMessage{
+                Recipients: components.CreateSmsMessageRecipientsStr(
+                    "+48999888777",
+                ),
+                Message: "This is second SMS message content",
+                Unicode: v4.Pointer(true),
+            },
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: bulk_cid
+
+<!-- UsageSnippet language="go" operationID="sendSms" method="post" path="/messages/sms" example="bulk_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodyArrayOfSmsMessage(
+        []components.SmsMessage{
+            components.SmsMessage{
+                Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999999999",
+                        Cid: v4.Pointer("custom-id-A44445T"),
+                    },
+                ),
+                Message: "This is first SMS message content",
+                Unicode: v4.Pointer(true),
+            },
+            components.SmsMessage{
+                Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999888777",
+                        Cid: v4.Pointer("custom-id-F44445R"),
+                    },
+                ),
+                Message: "This is second SMS message content",
+                Unicode: v4.Pointer(true),
+            },
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multi
+
+<!-- UsageSnippet language="go" operationID="sendSms" method="post" path="/messages/sms" example="multi" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
+        components.SmsMessage{
+            Recipients: components.CreateSmsMessageRecipientsArrayOfStr(
+                []string{
+                    "+48999999999",
+                    "+48999888777",
+                },
+            ),
+            Message: "This is SMS message content.",
+            Unicode: v4.Pointer(true),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: multi_cid
+
+<!-- UsageSnippet language="go" operationID="sendSms" method="post" path="/messages/sms" example="multi_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
+        components.SmsMessage{
+            Recipients: components.CreateSmsMessageRecipientsArrayOfPhoneNumberWithCid(
+                []components.PhoneNumberWithCid{
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999999999",
+                        Cid: v4.Pointer("custom-id-A44445T"),
+                    },
+                    components.PhoneNumberWithCid{
+                        Nr: "+48999888777",
+                        Cid: v4.Pointer("custom-id-F44445R"),
+                    },
+                },
+            ),
+            Message: "This is SMS message content",
+            Unicode: v4.Pointer(true),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: single
+
+<!-- UsageSnippet language="go" operationID="sendSms" method="post" path="/messages/sms" example="single" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
     )
 
     res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
@@ -109,7 +527,48 @@ func main() {
                 "+48999999999",
             ),
             Message: "This is SMS message content.",
-            Unicode: v3.Pointer(true),
+            Unicode: v4.Pointer(true),
+        },
+    ))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Messages != nil {
+        // handle response
+    }
+}
+```
+### Example Usage: single_cid
+
+<!-- UsageSnippet language="go" operationID="sendSms" method="post" path="/messages/sms" example="single_cid" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/components"
+	"github.com/gsmservice-pl/messaging-sdk-go/v4/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v4.New(
+        v4.WithSecurity("<YOUR API ACCESS TOKEN>"),
+    )
+
+    res, err := s.Outgoing.Sms.Send(ctx, operations.CreateSendSmsRequestBodySmsMessage(
+        components.SmsMessage{
+            Recipients: components.CreateSmsMessageRecipientsPhoneNumberWithCid(
+                components.PhoneNumberWithCid{
+                    Nr: "+48999999999",
+                    Cid: v4.Pointer("custom-id-A44445T"),
+                },
+            ),
+            Message: "This is SMS message content",
+            Unicode: v4.Pointer(true),
         },
     ))
     if err != nil {
@@ -137,5 +596,6 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 403, 415, 4XX       | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
