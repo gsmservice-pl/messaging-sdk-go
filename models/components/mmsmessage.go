@@ -124,6 +124,77 @@ func (u Recipients) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type Recipients: all fields are null")
 }
 
+type AttachmentsType string
+
+const (
+	AttachmentsTypeStr        AttachmentsType = "str"
+	AttachmentsTypeArrayOfStr AttachmentsType = "arrayOfStr"
+)
+
+// Attachments for the message. You can pass here images, audio and video files bodies. To set one attachment please use `components.CreateAttachmentsStr()` method simply passing to it a `string` with attachment body encoded with `base64`. To set multiple attachments - please use `components.CreateAttachmentsArrayOfStr()` method passing to it `[]string` with attachment bodies encoded by `base64`. Max 3 attachments per message.
+type Attachments struct {
+	Str        *string  `queryParam:"inline" union:"member"`
+	ArrayOfStr []string `queryParam:"inline" union:"member"`
+
+	Type AttachmentsType
+}
+
+func CreateAttachmentsStr(str string) Attachments {
+	typ := AttachmentsTypeStr
+
+	return Attachments{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateAttachmentsArrayOfStr(arrayOfStr []string) Attachments {
+	typ := AttachmentsTypeArrayOfStr
+
+	return Attachments{
+		ArrayOfStr: arrayOfStr,
+		Type:       typ,
+	}
+}
+
+func (u *Attachments) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Attachments{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = AttachmentsTypeStr
+		return nil
+	}
+
+	var arrayOfStr []string = []string{}
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
+		u.ArrayOfStr = arrayOfStr
+		u.Type = AttachmentsTypeArrayOfStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Attachments", string(data))
+}
+
+func (u Attachments) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.ArrayOfStr != nil {
+		return utils.MarshalJSON(u.ArrayOfStr, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Attachments: all fields are null")
+}
+
 // MmsMessage - An object with a new MMS message properties
 type MmsMessage struct {
 	// The recipient number or multiple recipients numbers of single message. To set one recipient, simply use `components.CreateRecipientsStr()` method simply passing to it a `string` with his phone number. To set multiple recipients, please use `components.CreateRecipientsArrayOfStr()` method passing to it `[]string` with recipients.\r\n\r\nOptionally you can also set custom id (user identifier) for each message - use `components.CreateRecipientsPhoneNumberWithCid()` method passing `PhoneNumberWithCid` struct (in case of single recipient) or `operations.CreateRecipientsArrayOfPhoneNumberWithCid()` method passing `[]PhoneNumberWithCid` (in case of multiple recipients).
@@ -133,7 +204,7 @@ type MmsMessage struct {
 	// MMS message content. Missing or null is treated as empty text; a message may contain attachments.
 	Message *string `json:"message,omitempty"`
 	// Attachments for the message. You can pass here images, audio and video files bodies. To set one attachment please use `components.CreateAttachmentsStr()` method simply passing to it a `string` with attachment body encoded with `base64`. To set multiple attachments - please use `components.CreateAttachmentsArrayOfStr()` method passing to it `[]string` with attachment bodies encoded by `base64`. Max 3 attachments per message.
-	Attachments any `json:"attachments,omitempty"`
+	Attachments *Attachments `json:"attachments,omitempty"`
 	// Scheduled future date and time of sending the message (in ISO 8601 format). If missing or null - message will be sent immediately
 	Date *time.Time `default:"null" json:"date"`
 }
@@ -170,7 +241,7 @@ func (m *MmsMessage) GetMessage() *string {
 	return m.Message
 }
 
-func (m *MmsMessage) GetAttachments() any {
+func (m *MmsMessage) GetAttachments() *Attachments {
 	if m == nil {
 		return nil
 	}
