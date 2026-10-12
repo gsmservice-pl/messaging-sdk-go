@@ -67,11 +67,9 @@ func main() {
 			Recipients: components.CreateRecipientsStr(
 				"+48999999999",
 			),
-			Subject: v3.Pointer("This is a subject of the message"),
-			Message: v3.Pointer("This is MMS message content."),
-			Attachments: v3.Pointer(components.CreateAttachmentsStr(
-				"<file body in base64 format>",
-			)),
+			Subject:     v3.Pointer("This is a subject of the message"),
+			Message:     v3.Pointer("This is MMS message content."),
+			Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
 		},
 	))
 	if err != nil {

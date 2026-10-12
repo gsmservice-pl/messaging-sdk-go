@@ -45,9 +45,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the first message"),
                 Message: v3.Pointer("This is first MMS message content"),
-                Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                    "<file 1 body in base64 format>",
-                )),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             components.MmsMessage{
                 Recipients: components.CreateRecipientsStr(
@@ -55,9 +53,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the second message"),
                 Message: v3.Pointer("This is second MMS message content"),
-                Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                    "<file 2 body in base64 format>",
-                )),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
         },
     ))
@@ -101,9 +97,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the first message"),
                 Message: v3.Pointer("This is first MMS message content"),
-                Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                    "<file 1 body in base64 format>",
-                )),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             components.MmsMessage{
                 Recipients: components.CreateRecipientsPhoneNumberWithCid(
@@ -114,9 +108,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the second message"),
                 Message: v3.Pointer("This is second MMS message content"),
-                Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                    "<file 2 body in base64 format>",
-                )),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
         },
     ))
@@ -159,9 +151,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
-            Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                "<file body in base64 format>",
-            )),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -209,9 +199,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content"),
-            Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                "<file body in base64 format>",
-            )),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -250,9 +238,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
-            Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                "<file body in base64 format>",
-            )),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -294,9 +280,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content"),
-            Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                "<file body in base64 format>",
-            )),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -365,9 +349,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the first message"),
                 Message: v3.Pointer("This is first MMS message content"),
-                Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                    "<file 1 body in base64 format>",
-                )),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             components.MmsMessage{
                 Recipients: components.CreateRecipientsStr(
@@ -375,9 +357,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the second message"),
                 Message: v3.Pointer("This is second MMS message content"),
-                Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                    "<file 2 body in base64 format>",
-                )),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
         },
     ))
@@ -421,9 +401,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the first message"),
                 Message: v3.Pointer("This is first MMS message content"),
-                Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                    "<file 1 body in base64 format>",
-                )),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
             components.MmsMessage{
                 Recipients: components.CreateRecipientsPhoneNumberWithCid(
@@ -434,9 +412,7 @@ func main() {
                 ),
                 Subject: v3.Pointer("This is a subject of the second message"),
                 Message: v3.Pointer("This is second MMS message content"),
-                Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                    "<file 2 body in base64 format>",
-                )),
+                Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
             },
         },
     ))
@@ -479,9 +455,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
-            Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                "<file body in base64 format>",
-            )),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -529,9 +503,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content"),
-            Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                "<file body in base64 format>",
-            )),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -570,9 +542,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content."),
-            Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                "<file body in base64 format>",
-            )),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
@@ -614,9 +584,7 @@ func main() {
             ),
             Subject: v3.Pointer("This is a subject of the message"),
             Message: v3.Pointer("This is MMS message content"),
-            Attachments: v3.Pointer(components.CreateAttachmentsStr(
-                "<file body in base64 format>",
-            )),
+            Attachments: "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
         },
     ))
     if err != nil {
