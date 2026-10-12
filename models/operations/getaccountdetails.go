@@ -10,6 +10,7 @@ type GetAccountDetailsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// The request was processed successfully
 	AccountResponse *components.AccountResponse
+	Headers         map[string][]string
 }
 
 func (g *GetAccountDetailsResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -24,4 +25,11 @@ func (g *GetAccountDetailsResponse) GetAccountResponse() *components.AccountResp
 		return nil
 	}
 	return g.AccountResponse
+}
+
+func (g *GetAccountDetailsResponse) GetHeaders() map[string][]string {
+	if g == nil {
+		return map[string][]string{}
+	}
+	return g.Headers
 }

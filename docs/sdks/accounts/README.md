@@ -57,7 +57,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 401, 403, 4XX            | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 403, 4XX                 | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## GetSubaccount
@@ -113,5 +114,6 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 401, 403, 404, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 403, 404, 4XX            | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |

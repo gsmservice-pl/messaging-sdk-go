@@ -22,6 +22,7 @@ type GetSubaccountDetailsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// The request was processed successfully
 	AccountResponse *components.AccountResponse
+	Headers         map[string][]string
 }
 
 func (g *GetSubaccountDetailsResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -36,4 +37,11 @@ func (g *GetSubaccountDetailsResponse) GetAccountResponse() *components.AccountR
 		return nil
 	}
 	return g.AccountResponse
+}
+
+func (g *GetSubaccountDetailsResponse) GetHeaders() map[string][]string {
+	if g == nil {
+		return map[string][]string{}
+	}
+	return g.Headers
 }

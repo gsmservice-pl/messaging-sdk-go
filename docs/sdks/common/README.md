@@ -54,5 +54,6 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
+| sdkerrors.ErrorResponse  | 405                      | application/problem+json |
 | sdkerrors.ErrorResponse  | 400, 4XX                 | application/problem+json |
 | sdkerrors.ErrorResponse  | 503, 5XX                 | application/problem+json |

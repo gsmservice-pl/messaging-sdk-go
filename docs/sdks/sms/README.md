@@ -300,7 +300,8 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 4XX            | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 415, 4XX            | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |
 
 ## Send
@@ -595,5 +596,6 @@ func main() {
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| sdkerrors.ErrorResponse  | 400, 401, 403, 4XX       | application/problem+json |
+| sdkerrors.ErrorResponse  | 401, 405                 | application/problem+json |
+| sdkerrors.ErrorResponse  | 400, 403, 415, 4XX       | application/problem+json |
 | sdkerrors.ErrorResponse  | 5XX                      | application/problem+json |

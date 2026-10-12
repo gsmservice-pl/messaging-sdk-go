@@ -2,13 +2,13 @@
 
 package components
 
-// CancelledMessage - An object containing information about results of cancelling single message
+// CancelledMessage - An object containing information about results of cancelling single message. A message whose current state prevents cancellation has status 409 and the message-not-cancellable problem type. The batch response uses HTTP 200.
 type CancelledMessage struct {
 	// Message ID
 	ID *int64 `json:"id,omitempty"`
 	// Status of cancellation (204 if cancelled successfully or error status code)
 	Status *int64 `json:"status,omitempty"`
-	// An object that complies with RFC 9457 containing information about a request error
+	// RFC 9457 Problem Details. See the [error catalog](https://api.szybkisms.pl/problems/) for problem types and recovery steps.
 	Error *ErrorResponse `json:"error,omitempty"`
 }
 

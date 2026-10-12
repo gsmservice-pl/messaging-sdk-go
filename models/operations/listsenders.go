@@ -10,6 +10,7 @@ type ListSendersResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// The request was processed successfully. Please find senders details in returned objects
 	Senders []components.Sender
+	Headers map[string][]string
 }
 
 func (l *ListSendersResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -24,4 +25,11 @@ func (l *ListSendersResponse) GetSenders() []components.Sender {
 		return nil
 	}
 	return l.Senders
+}
+
+func (l *ListSendersResponse) GetHeaders() map[string][]string {
+	if l == nil {
+		return map[string][]string{}
+	}
+	return l.Headers
 }

@@ -8,7 +8,7 @@ type RemovedIncomingMessage struct {
 	ID *int64 `json:"id,omitempty"`
 	// Status of removing (204 if removed successfully or error status code)
 	Status *int64 `json:"status,omitempty"`
-	// An object that complies with RFC 9457 containing information about a request error
+	// RFC 9457 Problem Details. See the [error catalog](https://api.szybkisms.pl/problems/) for problem types and recovery steps.
 	Error *ErrorResponse `json:"error,omitempty"`
 }
 

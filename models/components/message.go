@@ -25,9 +25,9 @@ type Message struct {
 	SentDate *time.Time `json:"sent_date,omitempty"`
 	// Date and time of last status change (in ISO 8601 format)
 	StatusDate *time.Time `json:"status_date,omitempty"`
-	// Message status code
+	// Message-processing status, e.g. QUEUED or REJECTED. Sending results use HTTP 200; further delivery status is available in message history.
 	StatusCode *string `json:"status_code,omitempty"`
-	// Human redable description of message status
+	// Human-readable description of the message status and any rejection reason.
 	StatusDescription *string `json:"status_description,omitempty"`
 	// Did the message contain special characters, e.g. Polish diacritics?
 	Unicode *bool `json:"unicode,omitempty"`

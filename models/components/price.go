@@ -2,9 +2,9 @@
 
 package components
 
-// Price - An object with the properties and price of a single message
+// Price - The pricing result for a single message, returned as part of an HTTP 200 response.
 type Price struct {
-	// Information about a possible error
+	// Description of a pricing failure for this message, or null when pricing succeeded. The batch response uses HTTP 200.
 	Error *string `json:"error,omitempty"`
 	// Custom message ID assigned by the User
 	Cid *string `json:"cid,omitempty"`
